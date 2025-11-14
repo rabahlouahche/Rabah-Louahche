@@ -1,0 +1,1694 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Rabah Louahche | Data & Web Engineering Portfolio</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/three@0.132.2/build/three.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/three@0.132.2/examples/js/loaders/GLTFLoader.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/three@0.132.2/examples/js/controls/OrbitControls.js"></script>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        :root {
+            --primary: #3498db;
+            --secondary: #2c3e50;
+            --accent: #e74c3c;
+            --light: #ecf0f1;
+            --dark: #2c3e50;
+            --shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            background-color: #f9f9f9;
+            color: #333;
+            line-height: 1.6;
+        }
+
+        /* Header & Navigation */
+        header {
+            background-color: var(--secondary);
+            color: white;
+            padding: 1rem 0;
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+            box-shadow: var(--shadow);
+        }
+
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+        }
+
+        .logo {
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: white;
+            text-decoration: none;
+        }
+
+        .logo span {
+            color: var(--primary);
+        }
+
+        .nav-links {
+            display: flex;
+            list-style: none;
+        }
+
+        .nav-links li {
+            margin-left: 2rem;
+        }
+
+        .nav-links a {
+            color: white;
+            text-decoration: none;
+            font-weight: 500;
+            transition: color 0.3s;
+        }
+
+        .nav-links a:hover {
+            color: var(--primary);
+        }
+
+        .menu-toggle {
+            display: none;
+            cursor: pointer;
+            font-size: 1.5rem;
+        }
+
+        /* Hero Section */
+        .hero {
+            height: 100vh;
+            background: linear-gradient(rgba(44, 62, 80, 0.8), rgba(44, 62, 80, 0.9)), url('https://images.unsplash.com/photo-1517077304055-6e89abbf09b0?ixlib=rb-4.0.3&auto=format&fit=crop&w=1350&q=80');
+            background-size: cover;
+            background-position: center;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            color: white;
+            padding: 0 2rem;
+        }
+
+        .hero-content h1 {
+            font-size: 3.5rem;
+            margin-bottom: 1rem;
+        }
+
+        .hero-content p {
+            font-size: 1.5rem;
+            margin-bottom: 2rem;
+        }
+
+        .btn {
+            display: inline-block;
+            background-color: var(--primary);
+            color: white;
+            padding: 0.8rem 2rem;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: all 0.3s;
+            border: none;
+            cursor: pointer;
+        }
+
+        .btn:hover {
+            background-color: #2980b9;
+            transform: translateY(-3px);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+        }
+
+        /* About Section */
+        .section {
+            padding: 5rem 2rem;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .section-title {
+            text-align: center;
+            margin-bottom: 3rem;
+            color: var(--secondary);
+            font-size: 2.5rem;
+        }
+
+        .about-content {
+            display: flex;
+            align-items: center;
+            gap: 3rem;
+        }
+
+        .about-text {
+            flex: 1;
+        }
+
+        .about-text h3 {
+            color: var(--secondary);
+            margin-bottom: 1rem;
+            font-size: 1.8rem;
+        }
+
+        .about-text p {
+            margin-bottom: 1.5rem;
+        }
+
+        .about-image {
+            flex: 1;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: var(--shadow);
+        }
+
+        .about-image img {
+            width: 100%;
+            height: auto;
+            display: block;
+        }
+
+        /* Skills Section */
+        .skills-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+        }
+
+        .skill-card {
+            background-color: white;
+            border-radius: 10px;
+            padding: 2rem;
+            box-shadow: var(--shadow);
+            transition: transform 0.3s;
+        }
+
+        .skill-card:hover {
+            transform: translateY(-10px);
+        }
+
+        .skill-card i {
+            font-size: 3rem;
+            color: var(--primary);
+            margin-bottom: 1rem;
+        }
+
+        .skill-card h3 {
+            margin-bottom: 1rem;
+            color: var(--secondary);
+        }
+
+        /* 3D Showcase Section */
+        .showcase {
+            background-color: var(--secondary);
+            color: white;
+            padding: 5rem 2rem;
+        }
+
+        .showcase-title {
+            text-align: center;
+            margin-bottom: 3rem;
+            font-size: 2.5rem;
+        }
+
+        .showcase-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            height: 500px;
+            perspective: 1000px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .cube-container {
+            width: 200px;
+            height: 200px;
+            position: relative;
+            transform-style: preserve-3d;
+            animation: rotate 20s infinite linear;
+        }
+
+        .cube-face {
+            position: absolute;
+            width: 200px;
+            height: 200px;
+            background: rgba(255, 255, 255, 0.1);
+            border: 2px solid rgba(255, 255, 255, 0.2);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            padding: 1rem;
+            border-radius: 10px;
+            backdrop-filter: blur(5px);
+        }
+
+        .cube-face i {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+            color: var(--primary);
+        }
+
+        .front { transform: translateZ(100px); }
+        .back { transform: rotateY(180deg) translateZ(100px); }
+        .right { transform: rotateY(90deg) translateZ(100px); }
+        .left { transform: rotateY(-90deg) translateZ(100px); }
+        .top { transform: rotateX(90deg) translateZ(100px); }
+        .bottom { transform: rotateX(-90deg) translateZ(100px); }
+
+        @keyframes rotate {
+            0% { transform: rotateX(0) rotateY(0); }
+            100% { transform: rotateX(360deg) rotateY(360deg); }
+        }
+
+        .showcase-controls {
+            text-align: center;
+            margin-top: 2rem;
+        }
+
+        /* Projects Section */
+        .projects-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+        }
+
+        .project-card {
+            background-color: white;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: var(--shadow);
+            transition: transform 0.3s;
+        }
+
+        .project-card:hover {
+            transform: translateY(-10px);
+        }
+
+        .project-image {
+            height: 200px;
+            overflow: hidden;
+        }
+
+        .project-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.5s;
+        }
+
+        .project-card:hover .project-image img {
+            transform: scale(1.1);
+        }
+
+        .project-info {
+            padding: 1.5rem;
+        }
+
+        .project-info h3 {
+            margin-bottom: 0.5rem;
+            color: var(--secondary);
+        }
+
+        /* 3D Projects Section */
+        .projects-3d {
+            background-color: var(--light);
+            padding: 5rem 2rem;
+        }
+
+        .projects-3d-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 2rem;
+        }
+
+        .project-3d-card {
+            background-color: white;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: var(--shadow);
+            transition: transform 0.3s;
+        }
+
+        .project-3d-card:hover {
+            transform: translateY(-10px);
+        }
+
+        .model-container {
+            height: 300px;
+            position: relative;
+            background-color: #f5f5f5;
+            overflow: hidden;
+        }
+
+        .model-container canvas {
+            width: 100%;
+            height: 100%;
+            display: block;
+        }
+
+        .model-loading {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background-color: rgba(255, 255, 255, 0.8);
+            z-index: 10;
+        }
+
+        .model-loading p {
+            font-weight: 600;
+            color: var(--secondary);
+        }
+
+        .project-3d-info {
+            padding: 1.5rem;
+        }
+
+        .project-3d-info h3 {
+            margin-bottom: 0.5rem;
+            color: var(--secondary);
+        }
+
+        .project-3d-info p {
+            margin-bottom: 1rem;
+        }
+
+        /* Contact Section */
+        .contact-container {
+            display: flex;
+            gap: 3rem;
+        }
+
+        .contact-info {
+            flex: 1;
+        }
+
+        .contact-form {
+            flex: 1;
+        }
+
+        .contact-item {
+            display: flex;
+            align-items: center;
+            margin-bottom: 1.5rem;
+        }
+
+        .contact-item i {
+            font-size: 1.5rem;
+            color: var(--primary);
+            margin-right: 1rem;
+            width: 30px;
+        }
+
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 0.5rem;
+            font-weight: 500;
+        }
+
+        .form-group input,
+        .form-group textarea {
+            width: 100%;
+            padding: 0.8rem;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            font-size: 1rem;
+        }
+
+        .form-group textarea {
+            height: 150px;
+            resize: vertical;
+        }
+
+        /* Footer */
+        footer {
+            background-color: var(--secondary);
+            color: white;
+            text-align: center;
+            padding: 2rem;
+        }
+
+        .social-links {
+            display: flex;
+            justify-content: center;
+            margin-bottom: 1rem;
+        }
+
+        .social-links a {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background-color: rgba(255, 255, 255, 0.1);
+            color: white;
+            margin: 0 0.5rem;
+            transition: all 0.3s;
+        }
+
+        .social-links a:hover {
+            background-color: var(--primary);
+            transform: translateY(-3px);
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .nav-links {
+                display: none;
+                flex-direction: column;
+                position: absolute;
+                top: 100%;
+                left: 0;
+                width: 100%;
+                background-color: var(--secondary);
+                padding: 1rem 0;
+            }
+
+            .nav-links.active {
+                display: flex;
+            }
+
+            .nav-links li {
+                margin: 0.5rem 0;
+                text-align: center;
+            }
+
+            .menu-toggle {
+                display: block;
+            }
+
+            .hero-content h1 {
+                font-size: 2.5rem;
+            }
+
+            .hero-content p {
+                font-size: 1.2rem;
+            }
+
+            .about-content {
+                flex-direction: column;
+            }
+
+            .contact-container {
+                flex-direction: column;
+            }
+        }
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        :root {
+            --primary: #3498db;
+            --secondary: #2c3e50;
+            --accent: #e74c3c;
+            --light: #ecf0f1;
+            --dark: #2c3e50;
+            --shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            background-color: #f9f9f9;
+            color: #333;
+            line-height: 1.6;
+        }
+
+        /* Header & Navigation */
+        header {
+            background-color: var(--secondary);
+            color: white;
+            padding: 1rem 0;
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+            box-shadow: var(--shadow);
+        }
+
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+        }
+
+        .logo {
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: white;
+            text-decoration: none;
+        }
+
+        .logo span {
+            color: var(--primary);
+        }
+
+        .nav-links {
+            display: flex;
+            list-style: none;
+        }
+
+        .nav-links li {
+            margin-left: 2rem;
+        }
+
+        .nav-links a {
+            color: white;
+            text-decoration: none;
+            font-weight: 500;
+            transition: color 0.3s;
+        }
+
+        .nav-links a:hover {
+            color: var(--primary);
+        }
+
+        .menu-toggle {
+            display: none;
+            cursor: pointer;
+            font-size: 1.5rem;
+        }
+
+        /* Hero Section */
+        .hero {
+            height: 100vh;
+            background: linear-gradient(rgba(44, 62, 80, 0.8), rgba(44, 62, 80, 0.9)), url('https://images.unsplash.com/photo-1517077304055-6e89abbf09b0?ixlib=rb-4.0.3&auto=format&fit=crop&w=1350&q=80');
+            background-size: cover;
+            background-position: center;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            color: white;
+            padding: 0 2rem;
+        }
+
+        .hero-content h1 {
+            font-size: 3.5rem;
+            margin-bottom: 1rem;
+        }
+
+        .hero-content p {
+            font-size: 1.5rem;
+            margin-bottom: 2rem;
+        }
+
+        .btn {
+            display: inline-block;
+            background-color: var(--primary);
+            color: white;
+            padding: 0.8rem 2rem;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: all 0.3s;
+            border: none;
+            cursor: pointer;
+        }
+
+        .btn:hover {
+            background-color: #2980b9;
+            transform: translateY(-3px);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+        }
+
+        .btn-outline {
+            background-color: transparent;
+            border: 2px solid var(--primary);
+            color: var(--primary);
+        }
+
+        .btn-outline:hover {
+            background-color: var(--primary);
+            color: white;
+        }
+
+        /* Section Styling */
+        .section {
+            padding: 5rem 2rem;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .section-title {
+            text-align: center;
+            margin-bottom: 3rem;
+            color: var(--secondary);
+            font-size: 2.5rem;
+        }
+
+        /* 3D Projects Section */
+        .projects-3d {
+            background-color: var(--light);
+        }
+
+        .projects-3d-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 2rem;
+        }
+
+        .project-3d-card {
+            background-color: white;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: var(--shadow);
+            transition: transform 0.3s, box-shadow 0.3s;
+            cursor: pointer;
+        }
+
+        .project-3d-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.15);
+        }
+
+        .model-preview {
+            height: 200px;
+            position: relative;
+            background-color: #f5f5f5;
+            overflow: hidden;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .model-preview img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.5s;
+        }
+
+        .project-3d-card:hover .model-preview img {
+            transform: scale(1.05);
+        }
+
+        .model-preview .preview-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(52, 152, 219, 0.8);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            opacity: 0;
+            transition: opacity 0.3s;
+        }
+
+        .project-3d-card:hover .preview-overlay {
+            opacity: 1;
+        }
+
+        .preview-overlay i {
+            font-size: 3rem;
+            color: white;
+        }
+
+        .project-3d-info {
+            padding: 1.5rem;
+        }
+
+        .project-3d-info h3 {
+            margin-bottom: 0.5rem;
+            color: var(--secondary);
+        }
+
+        .project-3d-info p {
+            margin-bottom: 1rem;
+            color: #666;
+        }
+
+        /* 3D Viewer Modal */
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.9);
+            z-index: 2000;
+            overflow: hidden;
+        }
+
+        .modal-content {
+            position: relative;
+            width: 90%;
+            height: 90%;
+            margin: 2% auto;
+            background-color: white;
+            border-radius: 10px;
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .modal-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1rem 1.5rem;
+            background-color: var(--secondary);
+            color: white;
+        }
+
+        .modal-header h3 {
+            margin: 0;
+        }
+
+        .close-modal {
+            background: none;
+            border: none;
+            color: white;
+            font-size: 1.5rem;
+            cursor: pointer;
+            transition: color 0.3s;
+        }
+
+        .close-modal:hover {
+            color: var(--primary);
+        }
+
+        .modal-body {
+            flex: 1;
+            display: flex;
+            position: relative;
+        }
+
+        .model-viewer {
+            width: 100%;
+            height: 100%;
+            background-color: #f5f5f5;
+        }
+
+        .model-controls {
+            position: absolute;
+            bottom: 20px;
+            left: 20px;
+            display: flex;
+            gap: 10px;
+            z-index: 10;
+        }
+
+        .control-btn {
+            background-color: rgba(255, 255, 255, 0.8);
+            border: none;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            cursor: pointer;
+            transition: background-color 0.3s;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+        }
+
+        .control-btn:hover {
+            background-color: white;
+        }
+
+        .model-info {
+            position: absolute;
+            bottom: 20px;
+            right: 20px;
+            background-color: rgba(255, 255, 255, 0.8);
+            padding: 10px 15px;
+            border-radius: 5px;
+            max-width: 300px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+        }
+
+        .model-info h4 {
+            margin-bottom: 5px;
+            color: var(--secondary);
+        }
+
+        .model-info p {
+            font-size: 0.9rem;
+            color: #666;
+        }
+
+        /* Footer */
+        footer {
+            background-color: var(--secondary);
+            color: white;
+            text-align: center;
+            padding: 2rem;
+        }
+
+        .social-links {
+            display: flex;
+            justify-content: center;
+            margin-bottom: 1rem;
+        }
+
+        .social-links a {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background-color: rgba(255, 255, 255, 0.1);
+            color: white;
+            margin: 0 0.5rem;
+            transition: all 0.3s;
+        }
+
+        .social-links a:hover {
+            background-color: var(--primary);
+            transform: translateY(-3px);
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .nav-links {
+                display: none;
+                flex-direction: column;
+                position: absolute;
+                top: 100%;
+                left: 0;
+                width: 100%;
+                background-color: var(--secondary);
+                padding: 1rem 0;
+            }
+
+            .nav-links.active {
+                display: flex;
+            }
+
+            .nav-links li {
+                margin: 0.5rem 0;
+                text-align: center;
+            }
+
+            .menu-toggle {
+                display: block;
+            }
+
+            .hero-content h1 {
+                font-size: 2.5rem;
+            }
+
+            .hero-content p {
+                font-size: 1.2rem;
+            }
+
+            .modal-content {
+                width: 95%;
+                height: 95%;
+                margin: 2.5% auto;
+            }
+
+            .model-controls, .model-info {
+                position: static;
+                margin: 10px;
+            }
+
+            .model-controls {
+                justify-content: center;
+            }
+        }
+    
+    </style>
+</head>
+<body>
+    <!-- Header & Navigation -->
+    <header>
+        <nav>
+            <a href="#" class="logo">Rabah<span>Louahche</span></a>
+            <ul class="nav-links">
+                <li><a href="#home">Home</a></li>
+                <li><a href="#about">About</a></li>
+                <li><a href="#skills">Skills</a></li>
+                <li><a href="#showcase">3D Showcase</a></li>
+                <li><a href="#projects">Projects</a></li>
+                <li><a href="#projects-3d">3D Projects</a></li>
+                <li><a href="#contact">Contact</a></li>
+            </ul>
+            <div class="menu-toggle">
+                <i class="fas fa-bars"></i>
+            </div>
+        </nav>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero" id="home">
+        <div class="hero-content">
+            <h1>Hi, I'm <span style="color: var(--primary)">Rabah Louahche</span></h1>
+            <p>Master 2 Student in Data & Web Engineering at Ferhat Abbas University</p>
+            <a href="#about" class="btn">Discover More</a>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section class="section" id="about">
+        <h2 class="section-title">About Me</h2>
+        <div class="about-content">
+            <div class="about-text">
+                <h3>My Journey</h3>
+                <p>I am a 22-year-old Master 2 student specializing in Data and Web Engineering at Ferhat Abbas University. My passion lies in transforming complex data into meaningful insights and creating innovative web solutions that make a difference.</p>
+                <p>Throughout my academic journey, I've developed a strong foundation in data analysis, machine learning, and full-stack web development. I'm constantly exploring new technologies and methodologies to enhance my skills and stay at the forefront of the industry.</p>
+                <p>My goal is to leverage my technical expertise to solve real-world problems and contribute to innovative projects that push the boundaries of what's possible in data science and web technologies.</p>
+                <a href="#contact" class="btn" style="margin-top: 1.5rem;">Get In Touch</a>
+            </div>
+            <div class="about-image">
+                <img src="img/p1.jpg" alt="Rabah Louahche">
+            </div>
+        </div>
+    </section>
+
+    <!-- Skills Section -->
+    <section class="section" id="skills">
+        <h2 class="section-title">My Skills</h2>
+        <div class="skills-container">
+            <div class="skill-card">
+                <i class="fas fa-code"></i>
+                <h3>Web Development</h3>
+                <p>Expert in HTML, CSS, JavaScript, React, and Node.js. Creating responsive and interactive web experiences with modern frameworks and best practices.</p>
+            </div>
+            <div class="skill-card">
+                <i class="fas fa-database"></i>
+                <h3>Data Engineering</h3>
+                <p>Proficient in data modeling, ETL processes, SQL and NoSQL databases, and data pipeline development using Python and related frameworks.</p>
+            </div>
+            <div class="skill-card">
+                <i class="fas fa-chart-line"></i>
+                <h3>Data Analysis</h3>
+                <p>Skilled in extracting insights from data using Python, R, statistical analysis, and visualization tools like Tableau and Power BI.</p>
+            </div>
+            <div class="skill-card">
+                <i class="fas fa-brain"></i>
+                <h3>Machine Learning</h3>
+                <p>Experience with supervised and unsupervised learning algorithms, neural networks, and implementing ML models using Scikit-learn and TensorFlow.</p>
+            </div>
+            <div class="skill-card">
+                <i class="fas fa-cloud"></i>
+                <h3>Cloud Computing</h3>
+                <p>Knowledge of deploying and managing applications on AWS, Azure, and Google Cloud platforms with focus on scalability and security.</p>
+            </div>
+            <div class="skill-card">
+                <i class="fas fa-mobile-alt"></i>
+                <h3>Mobile Development</h3>
+                <p>Building cross-platform mobile applications with React Native and Flutter, focusing on user experience and performance optimization.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- 3D Showcase Section -->
+    <section class="showcase" id="showcase">
+        <h2 class="showcase-title">3D Skills Showcase</h2>
+        <div class="showcase-container">
+            <div class="cube-container">
+                <div class="cube-face front">
+                    <i class="fas fa-code"></i>
+                    <h3>Web Development</h3>
+                </div>
+                <div class="cube-face back">
+                    <i class="fas fa-database"></i>
+                    <h3>Data Engineering</h3>
+                </div>
+                <div class="cube-face right">
+                    <i class="fas fa-chart-line"></i>
+                    <h3>Data Analysis</h3>
+                </div>
+                <div class="cube-face left">
+                    <i class="fas fa-brain"></i>
+                    <h3>Machine Learning</h3>
+                </div>
+                <div class="cube-face top">
+                    <i class="fas fa-cloud"></i>
+                    <h3>Cloud Computing</h3>
+                </div>
+                <div class="cube-face bottom">
+                    <i class="fas fa-mobile-alt"></i>
+                    <h3>Mobile Development</h3>
+                </div>
+            </div>
+        </div>
+        <div class="showcase-controls">
+            <p>Watch my skills rotate in 3D space</p>
+        </div>
+    </section>
+
+    <!-- Projects Section -->
+    <section class="section" id="projects">
+        <h2 class="section-title">My Projects</h2>
+        <div class="projects-grid">
+            <div class="project-card">
+                <div class="project-image">
+                    <img src="https://images.unsplash.com/photo-1555066931-4365d14bab8c?ixlib=rb-4.0.3&auto=format&fit=crop&w=1350&q=80" alt="Data Analysis Platform">
+                </div>
+                <div class="project-info">
+                    <h3>Data Analysis Platform</h3>
+                    <p>A comprehensive platform for data visualization and analysis with interactive dashboards and real-time data processing capabilities.</p>
+                    <a href="#" class="btn" style="margin-top: 1rem; padding: 0.5rem 1rem;">View Details</a>
+                </div>
+            </div>
+            <div class="project-card">
+                <div class="project-image">
+                    <img src="https://images.unsplash.com/photo-1551650975-87deedd944c3?ixlib=rb-4.0.3&auto=format&fit=crop&w=1350&q=80" alt="E-commerce Analytics">
+                </div>
+                <div class="project-info">
+                    <h3>E-commerce Analytics Dashboard</h3>
+                    <p>An analytics solution for e-commerce businesses providing insights into customer behavior, sales trends, and inventory management.</p>
+                    <a href="#" class="btn" style="margin-top: 1rem; padding: 0.5rem 1rem;">View Details</a>
+                </div>
+            </div>
+            <div class="project-card">
+                <div class="project-image">
+                    <img src="https://images.unsplash.com/photo-1551288049-bebda4e38f71?ixlib=rb-4.0.3&auto=format&fit=crop&w=1350&q=80" alt="ML Prediction Model">
+                </div>
+                <div class="project-info">
+                    <h3>ML Prediction Model</h3>
+                    <p>A machine learning model for predicting customer churn with 92% accuracy, implemented using Python and Scikit-learn.</p>
+                    <a href="#" class="btn" style="margin-top: 1rem; padding: 0.5rem 1rem;">View Details</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 3D Projects Section -->
+    <section class="section projects-3d" id="projects-3d">
+        <h2 class="section-title">Mes Projets 3D</h2>
+        <div class="projects-3d-grid">
+            <!-- Project 1 -->
+            <div class="project-3d-card" data-model="project1">
+                
+                <div class="model-preview">
+                    <img src="modle/TableChaisse.glb" alt="Projet 3D 1">
+                    <div class="preview-overlay">
+                        <i class="fas fa-cube"></i>
+                    </div>
+                </div>
+                <div class="project-3d-info">
+                    <h3>Visualisation de Données 3D</h3>
+                    <p>Modèle interactif pour visualiser des ensembles de données complexes en trois dimensions.</p>
+                    <button class="btn btn-outline view-model-btn">Voir en 3D</button>
+                </div>
+            </div>
+            
+            <!-- Project 2 -->
+            <div class="project-3d-card" data-model="project2">
+                <div class="model-preview">
+                    <img src="https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80" alt="Projet 3D 2">
+                    <div class="preview-overlay">
+                        <i class="fas fa-cube"></i>
+                    </div>
+                </div>
+                <div class="project-3d-info">
+                    <h3>Modèle Architectural</h3>
+                    <p>Rendu 3D d'un bâtiment avec textures réalistes et éclairage naturel.</p>
+                    <button class="btn btn-outline view-model-btn">Voir en 3D</button>
+                </div>
+            </div>
+            
+            <!-- Project 3 -->
+            <div class="project-3d-card" data-model="project3">
+                <div class="model-preview">
+                    <img src="https://images.unsplash.com/photo-1563089145-599997674d42?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80" alt="Projet 3D 3">
+                    <div class="preview-overlay">
+                        <i class="fas fa-cube"></i>
+                    </div>
+                </div>
+                <div class="project-3d-info">
+                    <h3>Design de Produit</h3>
+                    <p>Modélisation 3D d'un produit avec attention aux détails et ergonomie.</p>
+                    <button class="btn btn-outline view-model-btn">Voir en 3D</button>
+                </div>
+            </div>
+            
+            <!-- Project 4 -->
+            <div class="project-3d-card" data-model="project4">
+                <div class="model-preview">
+                    <img src="https://images.unsplash.com/photo-1635070041078-e363dbe005cb?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80" alt="Projet 3D 4">
+                    <div class="preview-overlay">
+                        <i class="fas fa-cube"></i>
+                    </div>
+                </div>
+                <div class="project-3d-info">
+                    <h3>Visualisation Scientifique</h3>
+                    <p>Représentation 3D de structures moléculaires pour la recherche scientifique.</p>
+                    <button class="btn btn-outline view-model-btn">Voir en 3D</button>
+                </div>
+            </div>
+            
+            <!-- Project 5 -->
+            <div class="project-3d-card" data-model="project5">
+                <div class="model-preview">
+                    <img src="https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80" alt="Projet 3D 5">
+                    <div class="preview-overlay">
+                        <i class="fas fa-cube"></i>
+                    </div>
+                </div>
+                <div class="project-3d-info">
+                    <h3>Asset de Jeu Vidéo</h3>
+                    <p>Création d'assets 3D optimisés pour l'intégration dans des moteurs de jeu.</p>
+                    <button class="btn btn-outline view-model-btn">Voir en 3D</button>
+                </div>
+            </div>
+            
+            <!-- Project 6 -->
+            <div class="project-3d-card" data-model="project6">
+                <div class="model-preview">
+                    <img src="https://images.unsplash.com/photo-1563089145-599997674d42?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80" alt="Projet 3D 6">
+                    <div class="preview-overlay">
+                        <i class="fas fa-cube"></i>
+                    </div>
+                </div>
+                <div class="project-3d-info">
+                    <h3>Expérience Web Immersive</h3>
+                    <p>Intégration 3D dans une expérience web interactive avec animations.</p>
+                    <button class="btn btn-outline view-model-btn">Voir en 3D</button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 3D Viewer Modal -->
+    <div class="modal" id="modelViewerModal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3 id="modalTitle">Visualisation 3D</h3>
+                <button class="close-modal">&times;</button>
+            </div>
+            <div class="modal-body">
+                <div class="model-viewer" id="modelViewer">
+                    <!-- Three.js canvas will be inserted here -->
+                </div>
+                <div class="model-controls">
+                    <button class="control-btn" id="resetView">
+                        <i class="fas fa-sync-alt"></i>
+                    </button>
+                    <button class="control-btn" id="toggleRotation">
+                        <i class="fas fa-play" id="rotationIcon"></i>
+                    </button>
+                    <button class="control-btn" id="toggleWireframe">
+                        <i class="fas fa-th" id="wireframeIcon"></i>
+                    </button>
+                </div>
+                <div class="model-info">
+                    <h4>Instructions</h4>
+                    <p>Faites glisser pour faire pivoter • Molette pour zoomer • Clic droit pour déplacer</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    
+
+    <script>
+        // Mobile menu toggle
+        document.querySelector('.menu-toggle').addEventListener('click', function() {
+            document.querySelector('.nav-links').classList.toggle('active');
+        });
+
+        // Close mobile menu when clicking on a link
+        document.querySelectorAll('.nav-links a').forEach(link => {
+            link.addEventListener('click', () => {
+                document.querySelector('.nav-links').classList.remove('active');
+            });
+        });
+
+        // Smooth scrolling for anchor links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function(e) {
+                e.preventDefault();
+                
+                const targetId = this.getAttribute('href');
+                if(targetId === '#') return;
+                
+                const targetElement = document.querySelector(targetId);
+                if(targetElement) {
+                    window.scrollTo({
+                        top: targetElement.offsetTop - 80,
+                        behavior: 'smooth'
+                    });
+                }
+            });
+        });
+
+        // 3D Model Viewer Functionality
+        let currentScene, currentCamera, currentRenderer, currentControls, currentModel;
+        let isRotating = true;
+        let isWireframe = false;
+
+        // Model data - replace with your actual .glb file paths
+        const modelData = {
+            project1: {
+                title: "Visualisation de Données 3D",
+                description: "Modèle interactif pour visualiser des ensembles de données complexes en trois dimensions.",
+                // path: "models/project1.glb" // Replace with actual path
+            },
+            project2: {
+                title: "Modèle Architectural",
+                description: "Rendu 3D d'un bâtiment avec textures réalistes et éclairage naturel.",
+                // path: "models/project2.glb" // Replace with actual path
+            },
+            project3: {
+                title: "Design de Produit",
+                description: "Modélisation 3D d'un produit avec attention aux détails et ergonomie.",
+                // path: "models/project3.glb" // Replace with actual path
+            },
+            project4: {
+                title: "Visualisation Scientifique",
+                description: "Représentation 3D de structures moléculaires pour la recherche scientifique.",
+                // path: "models/project4.glb" // Replace with actual path
+            },
+            project5: {
+                title: "Asset de Jeu Vidéo",
+                description: "Création d'assets 3D optimisés pour l'intégration dans des moteurs de jeu.",
+                // path: "models/project5.glb" // Replace with actual path
+            },
+            project6: {
+                title: "Expérience Web Immersive",
+                description: "Intégration 3D dans une expérience web interactive avec animations.",
+                // path: "models/project6.glb" // Replace with actual path
+            }
+        };
+
+        // Open modal when clicking on view model button
+        document.querySelectorAll('.view-model-btn').forEach(button => {
+            button.addEventListener('click', function() {
+                const projectCard = this.closest('.project-3d-card');
+                const modelId = projectCard.getAttribute('data-model');
+                openModelViewer(modelId);
+            });
+        });
+
+        // Close modal
+        document.querySelector('.close-modal').addEventListener('click', closeModelViewer);
+
+        // Close modal when clicking outside content
+        document.getElementById('modelViewerModal').addEventListener('click', function(e) {
+            if (e.target === this) {
+                closeModelViewer();
+            }
+        });
+
+        // Model controls
+        document.getElementById('resetView').addEventListener('click', resetView);
+        document.getElementById('toggleRotation').addEventListener('click', toggleRotation);
+        document.getElementById('toggleWireframe').addEventListener('click', toggleWireframe);
+
+        function openModelViewer(modelId) {
+            const modal = document.getElementById('modelViewerModal');
+            const modalTitle = document.getElementById('modalTitle');
+            const modelViewer = document.getElementById('modelViewer');
+            
+            // Set modal title
+            modalTitle.textContent = modelData[modelId].title;
+            
+            // Initialize Three.js scene
+            initThreeJS(modelViewer);
+            
+            // Load model (for demo, we'll create a placeholder)
+            // In production, you would load the actual .glb file
+            loadPlaceholderModel();
+            
+            // Show modal
+            modal.style.display = 'block';
+            document.body.style.overflow = 'hidden';
+        }
+
+        function closeModelViewer() {
+            const modal = document.getElementById('modelViewerModal');
+            modal.style.display = 'none';
+            document.body.style.overflow = 'auto';
+            
+            // Clean up Three.js resources
+            if (currentRenderer) {
+                currentRenderer.dispose();
+            }
+        }
+
+        function initThreeJS(container) {
+            // Clear previous content
+            while (container.firstChild) {
+                container.removeChild(container.firstChild);
+            }
+            
+            // Create scene
+            currentScene = new THREE.Scene();
+            currentScene.background = new THREE.Color(0xf5f5f5);
+            
+            // Create camera
+            currentCamera = new THREE.PerspectiveCamera(
+                75, 
+                container.clientWidth / container.clientHeight, 
+                0.1, 
+                1000
+            );
+            currentCamera.position.z = 5;
+            
+            // Create renderer
+            currentRenderer = new THREE.WebGLRenderer({ antialias: true });
+            currentRenderer.setSize(container.clientWidth, container.clientHeight);
+            currentRenderer.shadowMap.enabled = true;
+            currentRenderer.shadowMap.type = THREE.PCFSoftShadowMap;
+            container.appendChild(currentRenderer.domElement);
+            
+            // Add lights
+            const ambientLight = new THREE.AmbientLight(0xffffff, 0.6);
+            currentScene.add(ambientLight);
+            
+            const directionalLight = new THREE.DirectionalLight(0xffffff, 0.8);
+            directionalLight.position.set(10, 10, 5);
+            directionalLight.castShadow = true;
+            currentScene.add(directionalLight);
+            
+            // Add controls
+            currentControls = new THREE.OrbitControls(currentCamera, currentRenderer.domElement);
+            currentControls.enableDamping = true;
+            currentControls.dampingFactor = 0.05;
+            
+            // Start animation loop
+            animate();
+            
+            // Handle window resize
+            window.addEventListener('resize', function() {
+                currentCamera.aspect = container.clientWidth / container.clientHeight;
+                currentCamera.updateProjectionMatrix();
+                currentRenderer.setSize(container.clientWidth, container.clientHeight);
+            });
+        }
+
+        function loadPlaceholderModel() {
+            // For demo purposes, create a placeholder geometry
+            // In production, you would load the actual .glb file using:
+            // const loader = new THREE.GLTFLoader();
+            // loader.load(modelPath, function(gltf) { ... });
+            
+            const geometry = new THREE.BoxGeometry(2, 2, 2);
+            const materials = [
+                new THREE.MeshLambertMaterial({ color: 0x3498db }),
+                new THREE.MeshLambertMaterial({ color: 0x2c3e50 }),
+                new THREE.MeshLambertMaterial({ color: 0xe74c3c }),
+                new THREE.MeshLambertMaterial({ color: 0x2ecc71 }),
+                new THREE.MeshLambertMaterial({ color: 0xf39c12 }),
+                new THREE.MeshLambertMaterial({ color: 0x9b59b6 })
+            ];
+            
+            currentModel = new THREE.Mesh(geometry, materials);
+            currentModel.castShadow = true;
+            currentScene.add(currentModel);
+            
+            // Add a simple ground plane
+            const planeGeometry = new THREE.PlaneGeometry(10, 10);
+            const planeMaterial = new THREE.MeshLambertMaterial({ color: 0xcccccc });
+            const plane = new THREE.Mesh(planeGeometry, planeMaterial);
+            plane.rotation.x = -Math.PI / 2;
+            plane.position.y = -2;
+            plane.receiveShadow = true;
+            currentScene.add(plane);
+        }
+
+        function animate() {
+            requestAnimationFrame(animate);
+            
+            if (currentModel && isRotating) {
+                currentModel.rotation.x += 0.01;
+                currentModel.rotation.y += 0.01;
+            }
+            
+            if (currentControls) {
+                currentControls.update();
+            }
+            
+            if (currentRenderer && currentScene && currentCamera) {
+                currentRenderer.render(currentScene, currentCamera);
+            }
+        }
+
+        function resetView() {
+            if (currentControls) {
+                currentControls.reset();
+            }
+        }
+
+        function toggleRotation() {
+            isRotating = !isRotating;
+            const icon = document.getElementById('rotationIcon');
+            icon.className = isRotating ? 'fas fa-play' : 'fas fa-pause';
+        }
+
+        function toggleWireframe() {
+            isWireframe = !isWireframe;
+            const icon = document.getElementById('wireframeIcon');
+            
+            if (currentModel) {
+                currentModel.material.forEach(material => {
+                    material.wireframe = isWireframe;
+                });
+            }
+            
+            icon.className = isWireframe ? 'fas fa-th-large' : 'fas fa-th';
+        }
+    </script>
+</body>
+</html>
+
+    <!-- Contact Section -->
+    <section class="section" id="contact">
+        <h2 class="section-title">Get In Touch</h2>
+        <div class="contact-container">
+            <div class="contact-info">
+                <h3>Contact Information</h3>
+                <div class="contact-item">
+                    <i class="fas fa-envelope"></i>
+                    <p>rabah.louahche@example.com</p>
+                </div>
+                <div class="contact-item">
+                    <i class="fas fa-phone"></i>
+                    <p>+213 784 44 94 21</p>
+                </div>
+                <div class="contact-item">
+                    <i class="fas fa-map-marker-alt"></i>
+                    <p>Setif, Algeria</p>
+                </div>
+                <div class="contact-item">
+                    <i class="fas fa-university"></i>
+                    <p>Ferhat Abbas University</p>
+                </div>
+                <div class="social-links" style="justify-content: flex-start; margin-top: 2rem;">
+                    <a href="#"><i class="fab fa-linkedin-in"></i></a>
+                    <a href="#"><i class="fab fa-github"></i></a>
+                    <a href="#"><i class="fab fa-twitter"></i></a>
+                    <a href="#"><i class="fab fa-instagram"></i></a>
+                </div>
+            </div>
+            <div class="contact-form">
+                <form id="contactForm">
+                    <div class="form-group">
+                        <label for="name">Your Name</label>
+                        <input type="text" id="name" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="email">Your Email</label>
+                        <input type="email" id="email" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="subject">Subject</label>
+                        <input type="text" id="subject" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="message">Your Message</label>
+                        <textarea id="message" required></textarea>
+                    </div>
+                    <button type="submit" class="btn">Send Message</button>
+                </form>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="social-links">
+            <a href="#https://www.facebook.com/profile.php?id=61577191080928&mibextid=ZbWKwL" class="social-link facebook">
+                <i class="fab fa-facebook-f"></i>
+            </a>
+            <a href="#https://www.instagram.com/louahcherabah?igsh=Z3Q0MDIxYnJ2cHFn" class="social-link instagram">
+                <i class="fab fa-instagram"></i>
+            </a>
+            <a href="mailto:example@example.com" class="social-link email">
+                <i class="fas fa-envelope"></i>
+            </a>
+            <a href="#" class="social-link linkedin">
+                <i class="fab fa-linkedin-in"></i>
+            </a>
+        </div>
+        <p>&copy; 2025 Rabah Louahche. All Rights Reserved.</p>
+    </footer>
+
+    <script>
+        // Mobile menu toggle
+        document.querySelector('.menu-toggle').addEventListener('click', function() {
+            document.querySelector('.nav-links').classList.toggle('active');
+        });
+
+        // Close mobile menu when clicking on a link
+        document.querySelectorAll('.nav-links a').forEach(link => {
+            link.addEventListener('click', () => {
+                document.querySelector('.nav-links').classList.remove('active');
+            });
+        });
+
+        // Smooth scrolling for anchor links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function(e) {
+                e.preventDefault();
+                
+                const targetId = this.getAttribute('href');
+                if(targetId === '#') return;
+                
+                const targetElement = document.querySelector(targetId);
+                if(targetElement) {
+                    window.scrollTo({
+                        top: targetElement.offsetTop - 80,
+                        behavior: 'smooth'
+                    });
+                }
+            });
+        });
+
+        // Form submission
+        document.getElementById('contactForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            alert('Thank you for your message! I will get back to you soon.');
+            this.reset();
+        });
+
+        // 3D Model Loading and Rendering
+        document.addEventListener('DOMContentLoaded', function() {
+            // List of model paths - replace with your actual .glb file paths
+            const modelPaths = [
+                'models/project1.glb',
+                'models/project2.glb',
+                'models/project3.glb',
+                'models/project4.glb',
+                'models/project5.glb',
+                'models/project6.glb'
+            ];
+
+            // Initialize Three.js scenes for each model container
+            for (let i = 0; i < 6; i++) {
+                const containerId = `model-container-${i+1}`;
+                const container = document.getElementById(containerId);
+                
+                // Create scene
+                const scene = new THREE.Scene();
+                scene.background = new THREE.Color(0xf5f5f5);
+                
+                // Create camera
+                const camera = new THREE.PerspectiveCamera(
+                    75, 
+                    container.clientWidth / container.clientHeight, 
+                    0.1, 
+                    1000
+                );
+                camera.position.z = 5;
+                
+                // Create renderer
+                const renderer = new THREE.WebGLRenderer({ antialias: true });
+                renderer.setSize(container.clientWidth, container.clientHeight);
+                container.appendChild(renderer.domElement);
+                
+                // Add lights
+                const ambientLight = new THREE.AmbientLight(0xffffff, 0.6);
+                scene.add(ambientLight);
+                
+                const directionalLight = new THREE.DirectionalLight(0xffffff, 0.8);
+                directionalLight.position.set(10, 10, 5);
+                scene.add(directionalLight);
+                
+                // Add controls
+                const controls = new THREE.OrbitControls(camera, renderer.domElement);
+                controls.enableDamping = true;
+                controls.dampingFactor = 0.05;
+                
+                // Load model
+                const loader = new THREE.GLTFLoader();
+                
+                // For demonstration, we'll use a placeholder cube since we don't have actual .glb files
+                // In a real implementation, you would load your actual models
+                const geometry = new THREE.BoxGeometry(2, 2, 2);
+                const materials = [
+                    new THREE.MeshLambertMaterial({ color: 0x3498db }), // right
+                    new THREE.MeshLambertMaterial({ color: 0x2c3e50 }), // left
+                    new THREE.MeshLambertMaterial({ color: 0xe74c3c }), // top
+                    new THREE.MeshLambertMaterial({ color: 0x2ecc71 }), // bottom
+                    new THREE.MeshLambertMaterial({ color: 0xf39c12 }), // front
+                    new THREE.MeshLambertMaterial({ color: 0x9b59b6 })  // back
+                ];
+                const cube = new THREE.Mesh(geometry, materials);
+                scene.add(cube);
+                
+                // Remove loading indicator
+                const loadingIndicator = container.querySelector('.model-loading');
+                if (loadingIndicator) {
+                    loadingIndicator.style.display = 'none';
+                }
+                
+                // Animation loop
+                function animate() {
+                    requestAnimationFrame(animate);
+                    
+                    // Rotate the cube
+                    cube.rotation.x += 0.01;
+                    cube.rotation.y += 0.01;
+                    
+                    controls.update();
+                    renderer.render(scene, camera);
+                }
+                
+                animate();
+                
+                // Handle window resize
+                window.addEventListener('resize', function() {
+                    camera.aspect = container.clientWidth / container.clientHeight;
+                    camera.updateProjectionMatrix();
+                    renderer.setSize(container.clientWidth, container.clientHeight);
+                });
+            }
+        });
+    </script>
+</body>
+</html>
