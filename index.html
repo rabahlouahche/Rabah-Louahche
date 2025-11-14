@@ -9,6 +9,7 @@
     <script src="https://cdn.jsdelivr.net/npm/three@0.132.2/examples/js/loaders/GLTFLoader.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/three@0.132.2/examples/js/controls/OrbitControls.js"></script>
     <style>
+        /* Vos styles existants restent ici */
         * {
             margin: 0;
             padding: 0;
@@ -520,434 +521,249 @@
                 flex-direction: column;
             }
         }
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-        }
 
-        :root {
-            --primary: #3498db;
-            --secondary: #2c3e50;
-            --accent: #e74c3c;
-            --light: #ecf0f1;
-            --dark: #2c3e50;
-            --shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-        }
-
-        html {
-            scroll-behavior: smooth;
-        }
-
-        body {
-            background-color: #f9f9f9;
-            color: #333;
-            line-height: 1.6;
-        }
-
-        /* Header & Navigation */
-        header {
-            background-color: var(--secondary);
+        /* NOUVEAUX STYLES POUR LA SECTION BLENDER 3D */
+        .blender-section {
+            background: linear-gradient(135deg, #1a2a3a, #2c3e50);
             color: white;
-            padding: 1rem 0;
-            position: fixed;
-            width: 100%;
-            top: 0;
-            z-index: 1000;
-            box-shadow: var(--shadow);
-        }
-
-        nav {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 0 2rem;
-        }
-
-        .logo {
-            font-size: 1.8rem;
-            font-weight: 700;
-            color: white;
-            text-decoration: none;
-        }
-
-        .logo span {
-            color: var(--primary);
-        }
-
-        .nav-links {
-            display: flex;
-            list-style: none;
-        }
-
-        .nav-links li {
-            margin-left: 2rem;
-        }
-
-        .nav-links a {
-            color: white;
-            text-decoration: none;
-            font-weight: 500;
-            transition: color 0.3s;
-        }
-
-        .nav-links a:hover {
-            color: var(--primary);
-        }
-
-        .menu-toggle {
-            display: none;
-            cursor: pointer;
-            font-size: 1.5rem;
-        }
-
-        /* Hero Section */
-        .hero {
-            height: 100vh;
-            background: linear-gradient(rgba(44, 62, 80, 0.8), rgba(44, 62, 80, 0.9)), url('https://images.unsplash.com/photo-1517077304055-6e89abbf09b0?ixlib=rb-4.0.3&auto=format&fit=crop&w=1350&q=80');
-            background-size: cover;
-            background-position: center;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            text-align: center;
-            color: white;
-            padding: 0 2rem;
-        }
-
-        .hero-content h1 {
-            font-size: 3.5rem;
-            margin-bottom: 1rem;
-        }
-
-        .hero-content p {
-            font-size: 1.5rem;
-            margin-bottom: 2rem;
-        }
-
-        .btn {
-            display: inline-block;
-            background-color: var(--primary);
-            color: white;
-            padding: 0.8rem 2rem;
-            border-radius: 50px;
-            text-decoration: none;
-            font-weight: 600;
-            transition: all 0.3s;
-            border: none;
-            cursor: pointer;
-        }
-
-        .btn:hover {
-            background-color: #2980b9;
-            transform: translateY(-3px);
-            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
-        }
-
-        .btn-outline {
-            background-color: transparent;
-            border: 2px solid var(--primary);
-            color: var(--primary);
-        }
-
-        .btn-outline:hover {
-            background-color: var(--primary);
-            color: white;
-        }
-
-        /* Section Styling */
-        .section {
             padding: 5rem 2rem;
+        }
+
+        .blender-container {
             max-width: 1200px;
             margin: 0 auto;
         }
 
-        .section-title {
+        .blender-intro {
             text-align: center;
-            margin-bottom: 3rem;
-            color: var(--secondary);
-            font-size: 2.5rem;
+            max-width: 800px;
+            margin: 0 auto 3rem;
+            font-size: 1.1rem;
+            line-height: 1.7;
         }
 
-        /* 3D Projects Section */
-        .projects-3d {
-            background-color: var(--light);
-        }
-
-        .projects-3d-grid {
+        .blender-grid {
             display: grid;
             grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
             gap: 2rem;
+            margin: 2rem 0;
         }
 
-        .project-3d-card {
-            background-color: white;
+        .blender-card {
+            background: rgba(255, 255, 255, 0.1);
             border-radius: 10px;
             overflow: hidden;
-            box-shadow: var(--shadow);
-            transition: transform 0.3s, box-shadow 0.3s;
-            cursor: pointer;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            backdrop-filter: blur(10px);
         }
 
-        .project-3d-card:hover {
+        .blender-card:hover {
             transform: translateY(-10px);
-            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.15);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.3);
         }
 
-        .model-preview {
+        .blender-preview {
             height: 200px;
+            width: 100%;
+            background-color: #1a1a1a;
             position: relative;
-            background-color: #f5f5f5;
             overflow: hidden;
-            display: flex;
-            justify-content: center;
-            align-items: center;
         }
 
-        .model-preview img {
+        .blender-preview canvas {
             width: 100%;
             height: 100%;
-            object-fit: cover;
-            transition: transform 0.5s;
         }
 
-        .project-3d-card:hover .model-preview img {
-            transform: scale(1.05);
-        }
-
-        .model-preview .preview-overlay {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: rgba(52, 152, 219, 0.8);
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            opacity: 0;
-            transition: opacity 0.3s;
-        }
-
-        .project-3d-card:hover .preview-overlay {
-            opacity: 1;
-        }
-
-        .preview-overlay i {
-            font-size: 3rem;
-            color: white;
-        }
-
-        .project-3d-info {
+        .blender-info {
             padding: 1.5rem;
         }
 
-        .project-3d-info h3 {
+        .blender-title {
+            font-size: 1.3rem;
             margin-bottom: 0.5rem;
-            color: var(--secondary);
+            color: white;
         }
 
-        .project-3d-info p {
+        .blender-description {
+            color: rgba(255, 255, 255, 0.8);
             margin-bottom: 1rem;
-            color: #666;
+            font-size: 0.95rem;
         }
 
-        /* 3D Viewer Modal */
-        .modal {
+        .blender-meta {
+            display: flex;
+            justify-content: space-between;
+            font-size: 0.85rem;
+            color: rgba(255, 255, 255, 0.7);
+            margin-bottom: 1rem;
+        }
+
+        .blender-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 5px;
+            margin-bottom: 1rem;
+        }
+
+        .blender-tag {
+            background: rgba(52, 152, 219, 0.3);
+            padding: 3px 8px;
+            border-radius: 3px;
+            font-size: 0.75rem;
+        }
+
+        .blender-btn {
+            display: inline-block;
+            background: var(--primary);
+            color: white;
+            padding: 8px 15px;
+            border-radius: 5px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: background 0.3s ease;
+            cursor: pointer;
+            border: none;
+            width: 100%;
+            text-align: center;
+        }
+
+        .blender-btn:hover {
+            background: #2980b9;
+        }
+
+        .blender-modal {
             display: none;
             position: fixed;
             top: 0;
             left: 0;
             width: 100%;
             height: 100%;
-            background-color: rgba(0, 0, 0, 0.9);
+            background: rgba(0, 0, 0, 0.9);
             z-index: 2000;
-            overflow: hidden;
+            overflow-y: auto;
+            padding: 1rem 0;
         }
 
-        .modal-content {
-            position: relative;
-            width: 90%;
-            height: 90%;
-            margin: 2% auto;
-            background-color: white;
+        .blender-modal-content {
+            background: white;
+            width: 95%;
+            max-width: 1200px;
+            margin: 0 auto;
             border-radius: 10px;
             overflow: hidden;
-            display: flex;
-            flex-direction: column;
+            box-shadow: 0 5px 30px rgba(0, 0, 0, 0.3);
         }
 
-        .modal-header {
+        .blender-modal-header {
+            padding: 1.5rem;
+            background: var(--secondary);
+            color: white;
             display: flex;
             justify-content: space-between;
             align-items: center;
-            padding: 1rem 1.5rem;
-            background-color: var(--secondary);
-            color: white;
         }
 
-        .modal-header h3 {
-            margin: 0;
-        }
-
-        .close-modal {
+        .blender-close-modal {
             background: none;
             border: none;
             color: white;
             font-size: 1.5rem;
             cursor: pointer;
-            transition: color 0.3s;
         }
 
-        .close-modal:hover {
-            color: var(--primary);
-        }
-
-        .modal-body {
-            flex: 1;
+        .blender-modal-body {
+            padding: 2rem;
             display: flex;
+            flex-direction: column;
+            gap: 2rem;
+        }
+
+        .blender-viewer-container {
+            width: 100%;
+            height: 500px;
+            background-color: #1a1a1a;
+            border-radius: 8px;
+            overflow: hidden;
             position: relative;
         }
 
-        .model-viewer {
+        .blender-viewer-container canvas {
             width: 100%;
             height: 100%;
-            background-color: #f5f5f5;
         }
 
-        .model-controls {
-            position: absolute;
-            bottom: 20px;
-            left: 20px;
+        .blender-controls {
             display: flex;
             gap: 10px;
-            z-index: 10;
+            justify-content: center;
+            flex-wrap: wrap;
+            margin-top: 10px;
         }
 
-        .control-btn {
-            background-color: rgba(255, 255, 255, 0.8);
+        .blender-control-btn {
+            background: var(--light);
             border: none;
-            width: 40px;
-            height: 40px;
-            border-radius: 50%;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            cursor: pointer;
-            transition: background-color 0.3s;
-            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
-        }
-
-        .control-btn:hover {
-            background-color: white;
-        }
-
-        .model-info {
-            position: absolute;
-            bottom: 20px;
-            right: 20px;
-            background-color: rgba(255, 255, 255, 0.8);
-            padding: 10px 15px;
+            padding: 8px 15px;
             border-radius: 5px;
-            max-width: 300px;
-            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
-        }
-
-        .model-info h4 {
-            margin-bottom: 5px;
-            color: var(--secondary);
-        }
-
-        .model-info p {
-            font-size: 0.9rem;
-            color: #666;
-        }
-
-        /* Footer */
-        footer {
-            background-color: var(--secondary);
-            color: white;
-            text-align: center;
-            padding: 2rem;
-        }
-
-        .social-links {
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-weight: 600;
             display: flex;
-            justify-content: center;
+            align-items: center;
+            gap: 5px;
+        }
+
+        .blender-control-btn:hover {
+            background: var(--primary);
+            color: white;
+        }
+
+        .blender-loading {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            color: white;
+            font-size: 1.2rem;
+            text-align: center;
+        }
+
+        .blender-report-section {
+            margin-bottom: 2rem;
+        }
+
+        .blender-report-section h3 {
+            color: var(--secondary);
+            margin-bottom: 1rem;
+            padding-bottom: 0.5rem;
+            border-bottom: 2px solid var(--light);
+        }
+
+        .blender-report-section p {
             margin-bottom: 1rem;
         }
 
-        .social-links a {
+        .blender-tech-list {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+            gap: 10px;
+            margin-top: 1rem;
+        }
+
+        .blender-tech-item {
+            background: var(--light);
+            padding: 10px;
+            border-radius: 5px;
             display: flex;
             align-items: center;
-            justify-content: center;
-            width: 40px;
-            height: 40px;
-            border-radius: 50%;
-            background-color: rgba(255, 255, 255, 0.1);
-            color: white;
-            margin: 0 0.5rem;
-            transition: all 0.3s;
+            gap: 10px;
         }
 
-        .social-links a:hover {
-            background-color: var(--primary);
-            transform: translateY(-3px);
+        .blender-tech-item i {
+            color: var(--primary);
         }
-
-        /* Responsive Design */
-        @media (max-width: 768px) {
-            .nav-links {
-                display: none;
-                flex-direction: column;
-                position: absolute;
-                top: 100%;
-                left: 0;
-                width: 100%;
-                background-color: var(--secondary);
-                padding: 1rem 0;
-            }
-
-            .nav-links.active {
-                display: flex;
-            }
-
-            .nav-links li {
-                margin: 0.5rem 0;
-                text-align: center;
-            }
-
-            .menu-toggle {
-                display: block;
-            }
-
-            .hero-content h1 {
-                font-size: 2.5rem;
-            }
-
-            .hero-content p {
-                font-size: 1.2rem;
-            }
-
-            .modal-content {
-                width: 95%;
-                height: 95%;
-                margin: 2.5% auto;
-            }
-
-            .model-controls, .model-info {
-                position: static;
-                margin: 10px;
-            }
-
-            .model-controls {
-                justify-content: center;
-            }
-        }
-    
     </style>
 </head>
 <body>
@@ -961,7 +777,7 @@
                 <li><a href="#skills">Skills</a></li>
                 <li><a href="#showcase">3D Showcase</a></li>
                 <li><a href="#projects">Projects</a></li>
-                <li><a href="#projects-3d">3D Projects</a></li>
+                <li><a href="#blender">Blender 3D</a></li>
                 <li><a href="#contact">Contact</a></li>
             </ul>
             <div class="menu-toggle">
@@ -1106,385 +922,136 @@
         </div>
     </section>
 
-    <!-- 3D Projects Section -->
-    <section class="section projects-3d" id="projects-3d">
-        <h2 class="section-title">Mes Projets 3D</h2>
-        <div class="projects-3d-grid">
-            <!-- Project 1 -->
-            <div class="project-3d-card" data-model="project1">
-                
-                <div class="model-preview">
-                    <img src="modle/TableChaisse.glb" alt="Projet 3D 1">
-                    <div class="preview-overlay">
-                        <i class="fas fa-cube"></i>
-                    </div>
-                </div>
-                <div class="project-3d-info">
-                    <h3>Visualisation de Données 3D</h3>
-                    <p>Modèle interactif pour visualiser des ensembles de données complexes en trois dimensions.</p>
-                    <button class="btn btn-outline view-model-btn">Voir en 3D</button>
-                </div>
+    <!-- NOUVELLE SECTION BLENDER 3D -->
+    <section class="blender-section" id="blender">
+        <div class="blender-container">
+            <h2 class="section-title" style="color: white;">Blender 3D Portfolio</h2>
+            <div class="blender-intro">
+                <p>Welcome to my 3D modeling portfolio. Each project includes an interactive 3D model and a detailed report on the creation process. Explore my work in 3D modeling, texturing, and rendering using Blender.</p>
             </div>
-            
-            <!-- Project 2 -->
-            <div class="project-3d-card" data-model="project2">
-                <div class="model-preview">
-                    <img src="https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80" alt="Projet 3D 2">
-                    <div class="preview-overlay">
-                        <i class="fas fa-cube"></i>
+
+            <div class="blender-grid">
+                <!-- Projet 1 - Vaisseau Spatial -->
+                <div class="blender-card">
+                    <div class="blender-preview" id="blender-preview-1">
+                        <div class="blender-loading">Loading 3D Model...</div>
+                    </div>
+                    <div class="blender-info">
+                        <h3 class="blender-title">Spaceship</h3>
+                        <p class="blender-description">A detailed spaceship with PBR textures and advanced lighting systems.</p>
+                        <div class="blender-meta">
+                            <span><i class="far fa-calendar"></i> March 2023</span>
+                            <span><i class="far fa-clock"></i> 35 hours</span>
+                        </div>
+                        <div class="blender-tags">
+                            <span class="blender-tag">Sci-Fi</span>
+                            <span class="blender-tag">Hard Surface</span>
+                            <span class="blender-tag">Texturing</span>
+                        </div>
+                        <button class="blender-btn" data-project="1">View Project</button>
                     </div>
                 </div>
-                <div class="project-3d-info">
-                    <h3>Modèle Architectural</h3>
-                    <p>Rendu 3D d'un bâtiment avec textures réalistes et éclairage naturel.</p>
-                    <button class="btn btn-outline view-model-btn">Voir en 3D</button>
-                </div>
-            </div>
-            
-            <!-- Project 3 -->
-            <div class="project-3d-card" data-model="project3">
-                <div class="model-preview">
-                    <img src="https://images.unsplash.com/photo-1563089145-599997674d42?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80" alt="Projet 3D 3">
-                    <div class="preview-overlay">
-                        <i class="fas fa-cube"></i>
+
+                <!-- Projet 2 - Casque -->
+                <div class="blender-card">
+                    <div class="blender-preview" id="blender-preview-2">
+                        <div class="blender-loading">Loading 3D Model...</div>
+                    </div>
+                    <div class="blender-info">
+                        <h3 class="blender-title">Detailed Helmet</h3>
+                        <p class="blender-description">Helmet with realistic textures and advanced PBR materials.</p>
+                        <div class="blender-meta">
+                            <span><i class="far fa-calendar"></i> April 2023</span>
+                            <span><i class="far fa-clock"></i> 28 hours</span>
+                        </div>
+                        <div class="blender-tags">
+                            <span class="blender-tag">PBR</span>
+                            <span class="blender-tag">Texturing</span>
+                            <span class="blender-tag">Detail</span>
+                        </div>
+                        <button class="blender-btn" data-project="2">View Project</button>
                     </div>
                 </div>
-                <div class="project-3d-info">
-                    <h3>Design de Produit</h3>
-                    <p>Modélisation 3D d'un produit avec attention aux détails et ergonomie.</p>
-                    <button class="btn btn-outline view-model-btn">Voir en 3D</button>
-                </div>
-            </div>
-            
-            <!-- Project 4 -->
-            <div class="project-3d-card" data-model="project4">
-                <div class="model-preview">
-                    <img src="https://images.unsplash.com/photo-1635070041078-e363dbe005cb?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80" alt="Projet 3D 4">
-                    <div class="preview-overlay">
-                        <i class="fas fa-cube"></i>
+
+                <!-- Projet 3 - Lanterne -->
+                <div class="blender-card">
+                    <div class="blender-preview" id="blender-preview-3">
+                        <div class="blender-loading">Loading 3D Model...</div>
                     </div>
-                </div>
-                <div class="project-3d-info">
-                    <h3>Visualisation Scientifique</h3>
-                    <p>Représentation 3D de structures moléculaires pour la recherche scientifique.</p>
-                    <button class="btn btn-outline view-model-btn">Voir en 3D</button>
-                </div>
-            </div>
-            
-            <!-- Project 5 -->
-            <div class="project-3d-card" data-model="project5">
-                <div class="model-preview">
-                    <img src="https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80" alt="Projet 3D 5">
-                    <div class="preview-overlay">
-                        <i class="fas fa-cube"></i>
+                    <div class="blender-info">
+                        <h3 class="blender-title">Game Style Lantern</h3>
+                        <p class="blender-description">Low-poly game asset with stylized textures.</p>
+                        <div class="blender-meta">
+                            <span><i class="far fa-calendar"></i> May 2023</span>
+                            <span><i class="far fa-clock"></i> 15 hours</span>
+                        </div>
+                        <div class="blender-tags">
+                            <span class="blender-tag">Low-poly</span>
+                            <span class="blender-tag">Game Asset</span>
+                            <span class="blender-tag">Style</span>
+                        </div>
+                        <button class="blender-btn" data-project="3">View Project</button>
                     </div>
-                </div>
-                <div class="project-3d-info">
-                    <h3>Asset de Jeu Vidéo</h3>
-                    <p>Création d'assets 3D optimisés pour l'intégration dans des moteurs de jeu.</p>
-                    <button class="btn btn-outline view-model-btn">Voir en 3D</button>
-                </div>
-            </div>
-            
-            <!-- Project 6 -->
-            <div class="project-3d-card" data-model="project6">
-                <div class="model-preview">
-                    <img src="https://images.unsplash.com/photo-1563089145-599997674d42?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80" alt="Projet 3D 6">
-                    <div class="preview-overlay">
-                        <i class="fas fa-cube"></i>
-                    </div>
-                </div>
-                <div class="project-3d-info">
-                    <h3>Expérience Web Immersive</h3>
-                    <p>Intégration 3D dans une expérience web interactive avec animations.</p>
-                    <button class="btn btn-outline view-model-btn">Voir en 3D</button>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- 3D Viewer Modal -->
-    <div class="modal" id="modelViewerModal">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h3 id="modalTitle">Visualisation 3D</h3>
-                <button class="close-modal">&times;</button>
+    <!-- Modals pour les projets Blender -->
+    <div class="blender-modal" id="blender-modal-1">
+        <div class="blender-modal-content">
+            <div class="blender-modal-header">
+                <h2>Spaceship</h2>
+                <button class="blender-close-modal">&times;</button>
             </div>
-            <div class="modal-body">
-                <div class="model-viewer" id="modelViewer">
-                    <!-- Three.js canvas will be inserted here -->
+            <div class="blender-modal-body">
+                <div class="blender-viewer-container">
+                    <div id="blender-viewer-1"></div>
+                    <div class="blender-loading">Loading 3D Model...</div>
                 </div>
-                <div class="model-controls">
-                    <button class="control-btn" id="resetView">
-                        <i class="fas fa-sync-alt"></i>
+                <div class="blender-controls">
+                    <button class="blender-control-btn" id="blender-reset-view-1">
+                        <i class="fas fa-sync-alt"></i> Reset View
                     </button>
-                    <button class="control-btn" id="toggleRotation">
-                        <i class="fas fa-play" id="rotationIcon"></i>
+                    <button class="blender-control-btn" id="blender-toggle-rotation-1">
+                        <i class="fas fa-pause"></i> Pause Rotation
                     </button>
-                    <button class="control-btn" id="toggleWireframe">
-                        <i class="fas fa-th" id="wireframeIcon"></i>
+                    <button class="blender-control-btn" id="blender-wireframe-toggle-1">
+                        <i class="fas fa-border-style"></i> Wireframe Mode
+                    </button>
+                    <button class="blender-control-btn" id="blender-toggle-lights-1">
+                        <i class="fas fa-lightbulb"></i> Lights
                     </button>
                 </div>
-                <div class="model-info">
-                    <h4>Instructions</h4>
-                    <p>Faites glisser pour faire pivoter • Molette pour zoomer • Clic droit pour déplacer</p>
+                
+                <div class="blender-report-section">
+                    <h3>Project Overview</h3>
+                    <p>This project involved creating a detailed spaceship with realistic sci-fi design. The goal was to master hard surface modeling and PBR texturing techniques.</p>
+                </div>
+                
+                <div class="blender-report-section">
+                    <h3>Process & Techniques</h3>
+                    <p>The spaceship was created using several advanced techniques:</p>
+                    <ul>
+                        <li>Polygonal modeling with subdivision surface</li>
+                        <li>UV unwrapping for precise texturing</li>
+                        <li>PBR textures (Albedo, Normal, Roughness, Metalness)</li>
+                        <li>HDRI lighting for realistic rendering</li>
+                    </ul>
+                </div>
+                
+                <div class="blender-report-section">
+                    <h3>Technologies Used</h3>
+                    <div class="blender-tech-list">
+                        <div class="blender-tech-item"><i class="fab fa-blender"></i> Blender 3.4</div>
+                        <div class="blender-tech-item"><i class="fas fa-cube"></i> Modeling</div>
+                        <div class="blender-tech-item"><i class="fas fa-paint-brush"></i> Texture Painting</div>
+                        <div class="blender-tech-item"><i class="fas fa-sun"></i> Cycles Render</div>
+                    </div>
                 </div>
             </div>
         </div>
     </div>
-
-    
-
-    <script>
-        // Mobile menu toggle
-        document.querySelector('.menu-toggle').addEventListener('click', function() {
-            document.querySelector('.nav-links').classList.toggle('active');
-        });
-
-        // Close mobile menu when clicking on a link
-        document.querySelectorAll('.nav-links a').forEach(link => {
-            link.addEventListener('click', () => {
-                document.querySelector('.nav-links').classList.remove('active');
-            });
-        });
-
-        // Smooth scrolling for anchor links
-        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-            anchor.addEventListener('click', function(e) {
-                e.preventDefault();
-                
-                const targetId = this.getAttribute('href');
-                if(targetId === '#') return;
-                
-                const targetElement = document.querySelector(targetId);
-                if(targetElement) {
-                    window.scrollTo({
-                        top: targetElement.offsetTop - 80,
-                        behavior: 'smooth'
-                    });
-                }
-            });
-        });
-
-        // 3D Model Viewer Functionality
-        let currentScene, currentCamera, currentRenderer, currentControls, currentModel;
-        let isRotating = true;
-        let isWireframe = false;
-
-        // Model data - replace with your actual .glb file paths
-        const modelData = {
-            project1: {
-                title: "Visualisation de Données 3D",
-                description: "Modèle interactif pour visualiser des ensembles de données complexes en trois dimensions.",
-                // path: "models/project1.glb" // Replace with actual path
-            },
-            project2: {
-                title: "Modèle Architectural",
-                description: "Rendu 3D d'un bâtiment avec textures réalistes et éclairage naturel.",
-                // path: "models/project2.glb" // Replace with actual path
-            },
-            project3: {
-                title: "Design de Produit",
-                description: "Modélisation 3D d'un produit avec attention aux détails et ergonomie.",
-                // path: "models/project3.glb" // Replace with actual path
-            },
-            project4: {
-                title: "Visualisation Scientifique",
-                description: "Représentation 3D de structures moléculaires pour la recherche scientifique.",
-                // path: "models/project4.glb" // Replace with actual path
-            },
-            project5: {
-                title: "Asset de Jeu Vidéo",
-                description: "Création d'assets 3D optimisés pour l'intégration dans des moteurs de jeu.",
-                // path: "models/project5.glb" // Replace with actual path
-            },
-            project6: {
-                title: "Expérience Web Immersive",
-                description: "Intégration 3D dans une expérience web interactive avec animations.",
-                // path: "models/project6.glb" // Replace with actual path
-            }
-        };
-
-        // Open modal when clicking on view model button
-        document.querySelectorAll('.view-model-btn').forEach(button => {
-            button.addEventListener('click', function() {
-                const projectCard = this.closest('.project-3d-card');
-                const modelId = projectCard.getAttribute('data-model');
-                openModelViewer(modelId);
-            });
-        });
-
-        // Close modal
-        document.querySelector('.close-modal').addEventListener('click', closeModelViewer);
-
-        // Close modal when clicking outside content
-        document.getElementById('modelViewerModal').addEventListener('click', function(e) {
-            if (e.target === this) {
-                closeModelViewer();
-            }
-        });
-
-        // Model controls
-        document.getElementById('resetView').addEventListener('click', resetView);
-        document.getElementById('toggleRotation').addEventListener('click', toggleRotation);
-        document.getElementById('toggleWireframe').addEventListener('click', toggleWireframe);
-
-        function openModelViewer(modelId) {
-            const modal = document.getElementById('modelViewerModal');
-            const modalTitle = document.getElementById('modalTitle');
-            const modelViewer = document.getElementById('modelViewer');
-            
-            // Set modal title
-            modalTitle.textContent = modelData[modelId].title;
-            
-            // Initialize Three.js scene
-            initThreeJS(modelViewer);
-            
-            // Load model (for demo, we'll create a placeholder)
-            // In production, you would load the actual .glb file
-            loadPlaceholderModel();
-            
-            // Show modal
-            modal.style.display = 'block';
-            document.body.style.overflow = 'hidden';
-        }
-
-        function closeModelViewer() {
-            const modal = document.getElementById('modelViewerModal');
-            modal.style.display = 'none';
-            document.body.style.overflow = 'auto';
-            
-            // Clean up Three.js resources
-            if (currentRenderer) {
-                currentRenderer.dispose();
-            }
-        }
-
-        function initThreeJS(container) {
-            // Clear previous content
-            while (container.firstChild) {
-                container.removeChild(container.firstChild);
-            }
-            
-            // Create scene
-            currentScene = new THREE.Scene();
-            currentScene.background = new THREE.Color(0xf5f5f5);
-            
-            // Create camera
-            currentCamera = new THREE.PerspectiveCamera(
-                75, 
-                container.clientWidth / container.clientHeight, 
-                0.1, 
-                1000
-            );
-            currentCamera.position.z = 5;
-            
-            // Create renderer
-            currentRenderer = new THREE.WebGLRenderer({ antialias: true });
-            currentRenderer.setSize(container.clientWidth, container.clientHeight);
-            currentRenderer.shadowMap.enabled = true;
-            currentRenderer.shadowMap.type = THREE.PCFSoftShadowMap;
-            container.appendChild(currentRenderer.domElement);
-            
-            // Add lights
-            const ambientLight = new THREE.AmbientLight(0xffffff, 0.6);
-            currentScene.add(ambientLight);
-            
-            const directionalLight = new THREE.DirectionalLight(0xffffff, 0.8);
-            directionalLight.position.set(10, 10, 5);
-            directionalLight.castShadow = true;
-            currentScene.add(directionalLight);
-            
-            // Add controls
-            currentControls = new THREE.OrbitControls(currentCamera, currentRenderer.domElement);
-            currentControls.enableDamping = true;
-            currentControls.dampingFactor = 0.05;
-            
-            // Start animation loop
-            animate();
-            
-            // Handle window resize
-            window.addEventListener('resize', function() {
-                currentCamera.aspect = container.clientWidth / container.clientHeight;
-                currentCamera.updateProjectionMatrix();
-                currentRenderer.setSize(container.clientWidth, container.clientHeight);
-            });
-        }
-
-        function loadPlaceholderModel() {
-            // For demo purposes, create a placeholder geometry
-            // In production, you would load the actual .glb file using:
-            // const loader = new THREE.GLTFLoader();
-            // loader.load(modelPath, function(gltf) { ... });
-            
-            const geometry = new THREE.BoxGeometry(2, 2, 2);
-            const materials = [
-                new THREE.MeshLambertMaterial({ color: 0x3498db }),
-                new THREE.MeshLambertMaterial({ color: 0x2c3e50 }),
-                new THREE.MeshLambertMaterial({ color: 0xe74c3c }),
-                new THREE.MeshLambertMaterial({ color: 0x2ecc71 }),
-                new THREE.MeshLambertMaterial({ color: 0xf39c12 }),
-                new THREE.MeshLambertMaterial({ color: 0x9b59b6 })
-            ];
-            
-            currentModel = new THREE.Mesh(geometry, materials);
-            currentModel.castShadow = true;
-            currentScene.add(currentModel);
-            
-            // Add a simple ground plane
-            const planeGeometry = new THREE.PlaneGeometry(10, 10);
-            const planeMaterial = new THREE.MeshLambertMaterial({ color: 0xcccccc });
-            const plane = new THREE.Mesh(planeGeometry, planeMaterial);
-            plane.rotation.x = -Math.PI / 2;
-            plane.position.y = -2;
-            plane.receiveShadow = true;
-            currentScene.add(plane);
-        }
-
-        function animate() {
-            requestAnimationFrame(animate);
-            
-            if (currentModel && isRotating) {
-                currentModel.rotation.x += 0.01;
-                currentModel.rotation.y += 0.01;
-            }
-            
-            if (currentControls) {
-                currentControls.update();
-            }
-            
-            if (currentRenderer && currentScene && currentCamera) {
-                currentRenderer.render(currentScene, currentCamera);
-            }
-        }
-
-        function resetView() {
-            if (currentControls) {
-                currentControls.reset();
-            }
-        }
-
-        function toggleRotation() {
-            isRotating = !isRotating;
-            const icon = document.getElementById('rotationIcon');
-            icon.className = isRotating ? 'fas fa-play' : 'fas fa-pause';
-        }
-
-        function toggleWireframe() {
-            isWireframe = !isWireframe;
-            const icon = document.getElementById('wireframeIcon');
-            
-            if (currentModel) {
-                currentModel.material.forEach(material => {
-                    material.wireframe = isWireframe;
-                });
-            }
-            
-            icon.className = isWireframe ? 'fas fa-th-large' : 'fas fa-th';
-        }
-    </script>
-</body>
-</html>
 
     <!-- Contact Section -->
     <section class="section" id="contact">
@@ -1559,6 +1126,64 @@
     </footer>
 
     <script>
+        // =============================================
+        // CONFIGURATION - MODIFIEZ ICI POUR VOS MODÈLES
+        // =============================================
+
+        // Modèles d'exemple (URLs en ligne)
+        const blenderModels = {
+            1: {
+                glbPath: 'modles/TableChaisse',
+                scale: 2,
+                position: { x: 0, y: 0, z: 0 },
+                title: "Spaceship",
+                description: "A detailed spaceship with PBR textures"
+            },
+            2: {
+                glbPath: 'modles/AirgunHaenelModel3.glb',
+                scale: 2,
+                position: { x: 0, y: 0, z: 0 },
+                title: "Detailed Helmet", 
+                description: "Helmet with realistic textures and PBR materials"
+            },
+            3: {
+                glbPath: 'models/RainWithSaound.glb',
+                scale: 3,
+                position: { x: 0, y: 0, z: 0 },
+                title: "Game Style Lantern",
+                description: "Low-poly game asset with stylized textures"
+            }
+        };
+
+        // =============================================
+        // VOS MODÈLES - REMPLACEZ PAR VOS FICHIERS GLB
+        // =============================================
+        /*
+        const myBlenderModels = {
+            // Exemple avec vos fichiers locaux :
+            1: {
+                glbPath: 'models/mon_vaisseau.glb',
+                scale: 1.0,
+                position: { x: 0, y: 0, z: 0 },
+                title: "My Spaceship",
+                description: "Description of my project"
+            },
+            2: {
+                glbPath: 'models/mon_casque.glb', 
+                scale: 1.5,
+                position: { x: 0, y: -0.5, z: 0 },
+                title: "My Helmet",
+                description: "Other description"
+            }
+        };
+        */
+
+        // Utiliser mes modèles s'ils existent, sinon les exemples
+        const projectConfigs = Object.keys(blenderModels).length > 0 ? blenderModels : blenderModels;
+
+        // Variables globales pour les viewers Blender
+        const blenderViewers = {};
+
         // Mobile menu toggle
         document.querySelector('.menu-toggle').addEventListener('click', function() {
             document.querySelector('.nav-links').classList.toggle('active');
@@ -1596,97 +1221,267 @@
             this.reset();
         });
 
-        // 3D Model Loading and Rendering
+        // Initialiser les previews des cartes Blender
         document.addEventListener('DOMContentLoaded', function() {
-            // List of model paths - replace with your actual .glb file paths
-            const modelPaths = [
-                'models/project1.glb',
-                'models/project2.glb',
-                'models/project3.glb',
-                'models/project4.glb',
-                'models/project5.glb',
-                'models/project6.glb'
-            ];
+            initializeBlenderPreviews();
+        });
 
-            // Initialize Three.js scenes for each model container
-            for (let i = 0; i < 6; i++) {
-                const containerId = `model-container-${i+1}`;
-                const container = document.getElementById(containerId);
-                
-                // Create scene
-                const scene = new THREE.Scene();
-                scene.background = new THREE.Color(0xf5f5f5);
-                
-                // Create camera
-                const camera = new THREE.PerspectiveCamera(
-                    75, 
-                    container.clientWidth / container.clientHeight, 
-                    0.1, 
-                    1000
-                );
-                camera.position.z = 5;
-                
-                // Create renderer
-                const renderer = new THREE.WebGLRenderer({ antialias: true });
-                renderer.setSize(container.clientWidth, container.clientHeight);
-                container.appendChild(renderer.domElement);
-                
-                // Add lights
-                const ambientLight = new THREE.AmbientLight(0xffffff, 0.6);
-                scene.add(ambientLight);
-                
-                const directionalLight = new THREE.DirectionalLight(0xffffff, 0.8);
-                directionalLight.position.set(10, 10, 5);
-                scene.add(directionalLight);
-                
-                // Add controls
-                const controls = new THREE.OrbitControls(camera, renderer.domElement);
-                controls.enableDamping = true;
-                controls.dampingFactor = 0.05;
-                
-                // Load model
-                const loader = new THREE.GLTFLoader();
-                
-                // For demonstration, we'll use a placeholder cube since we don't have actual .glb files
-                // In a real implementation, you would load your actual models
-                const geometry = new THREE.BoxGeometry(2, 2, 2);
-                const materials = [
-                    new THREE.MeshLambertMaterial({ color: 0x3498db }), // right
-                    new THREE.MeshLambertMaterial({ color: 0x2c3e50 }), // left
-                    new THREE.MeshLambertMaterial({ color: 0xe74c3c }), // top
-                    new THREE.MeshLambertMaterial({ color: 0x2ecc71 }), // bottom
-                    new THREE.MeshLambertMaterial({ color: 0xf39c12 }), // front
-                    new THREE.MeshLambertMaterial({ color: 0x9b59b6 })  // back
-                ];
-                const cube = new THREE.Mesh(geometry, materials);
-                scene.add(cube);
-                
-                // Remove loading indicator
-                const loadingIndicator = container.querySelector('.model-loading');
-                if (loadingIndicator) {
-                    loadingIndicator.style.display = 'none';
-                }
-                
-                // Animation loop
+        // Initialiser les previews miniatures Blender
+        function initializeBlenderPreviews() {
+            Object.keys(projectConfigs).forEach(projectId => {
+                createBlenderPreview(projectId, projectConfigs[projectId]);
+            });
+        }
+
+        // Créer une preview miniature Blender
+        function createBlenderPreview(projectId, config) {
+            const container = document.getElementById(`blender-preview-${projectId}`);
+            if (!container) return;
+
+            const width = container.clientWidth;
+            const height = container.clientHeight;
+
+            // Scene
+            const scene = new THREE.Scene();
+            scene.background = new THREE.Color(0x1a1a1a);
+
+            // Camera
+            const camera = new THREE.PerspectiveCamera(50, width / height, 0.1, 1000);
+            camera.position.z = 5;
+
+            // Renderer
+            const renderer = new THREE.WebGLRenderer({ antialias: true, alpha: true });
+            renderer.setSize(width, height);
+            renderer.setClearColor(0x000000, 0);
+            
+            // Vider le conteneur et ajouter le renderer
+            container.innerHTML = '';
+            container.appendChild(renderer.domElement);
+
+            // Lumière
+            const ambientLight = new THREE.AmbientLight(0xffffff, 0.6);
+            scene.add(ambientLight);
+            
+            const directionalLight = new THREE.DirectionalLight(0xffffff, 0.8);
+            directionalLight.position.set(5, 10, 7);
+            scene.add(directionalLight);
+
+            // Charger le modèle GLB
+            const loader = new THREE.GLTFLoader();
+            loader.load(config.glbPath, (gltf) => {
+                const model = gltf.scene;
+                model.scale.set(config.scale * 0.3, config.scale * 0.3, config.scale * 0.3);
+                model.position.set(config.position.x, config.position.y, config.position.z);
+                scene.add(model);
+
+                // Animation de la preview
                 function animate() {
                     requestAnimationFrame(animate);
-                    
-                    // Rotate the cube
-                    cube.rotation.x += 0.01;
-                    cube.rotation.y += 0.01;
-                    
-                    controls.update();
+                    model.rotation.y += 0.01;
                     renderer.render(scene, camera);
                 }
-                
                 animate();
+            }, undefined, (error) => {
+                console.error(`Error loading preview ${projectId}:`, error);
+                container.innerHTML = '<div class="blender-loading">Loading Error</div>';
+            });
+        }
+
+        // Initialiser un viewer Blender complet
+        function initializeBlenderViewer(projectId, config) {
+            const container = document.getElementById(`blender-viewer-${projectId}`);
+            if (!container) return;
+
+            // Nettoyer le conteneur
+            container.innerHTML = '';
+
+            // Scene
+            const scene = new THREE.Scene();
+            scene.background = new THREE.Color(0x1a1a1a);
+
+            // Camera
+            const camera = new THREE.PerspectiveCamera(75, container.clientWidth / container.clientHeight, 0.1, 1000);
+            camera.position.z = 5;
+
+            // Renderer
+            const renderer = new THREE.WebGLRenderer({ antialias: true });
+            renderer.setSize(container.clientWidth, container.clientHeight);
+            renderer.shadowMap.enabled = true;
+            renderer.shadowMap.type = THREE.PCFSoftShadowMap;
+            container.appendChild(renderer.domElement);
+
+            // Controls
+            const controls = new THREE.OrbitControls(camera, renderer.domElement);
+            controls.enableDamping = true;
+            controls.dampingFactor = 0.05;
+
+            // Lumière ambiante
+            const ambientLight = new THREE.AmbientLight(0xffffff, 0.5);
+            scene.add(ambientLight);
+
+            // Lumière directionnelle principale
+            const mainLight = new THREE.DirectionalLight(0xffffff, 0.8);
+            mainLight.position.set(10, 10, 5);
+            mainLight.castShadow = true;
+            scene.add(mainLight);
+
+            let model = null;
+            let rotateModel = true;
+            let wireframeMode = false;
+            let lightsEnabled = true;
+
+            // Charger le modèle GLB
+            const loader = new THREE.GLTFLoader();
+            loader.load(config.glbPath, (gltf) => {
+                // Cacher le message de chargement
+                const loadingMessage = container.parentElement.querySelector('.blender-loading');
+                if (loadingMessage) loadingMessage.style.display = 'none';
+
+                model = gltf.scene;
+                model.scale.set(config.scale, config.scale, config.scale);
+                model.position.set(config.position.x, config.position.y, config.position.z);
                 
-                // Handle window resize
-                window.addEventListener('resize', function() {
-                    camera.aspect = container.clientWidth / container.clientHeight;
-                    camera.updateProjectionMatrix();
-                    renderer.setSize(container.clientWidth, container.clientHeight);
+                // Activer les ombres pour tous les meshes
+                model.traverse((child) => {
+                    if (child.isMesh) {
+                        child.castShadow = true;
+                        child.receiveShadow = true;
+                    }
                 });
+                
+                scene.add(model);
+
+                // Ajuster la caméra pour cadrer le modèle
+                const box = new THREE.Box3().setFromObject(model);
+                const center = box.getCenter(new THREE.Vector3());
+                const size = box.getSize(new THREE.Vector3());
+                const maxDim = Math.max(size.x, size.y, size.z);
+                const fov = camera.fov * (Math.PI / 180);
+                let cameraZ = Math.abs(maxDim / Math.sin(fov / 2));
+                
+                camera.position.z = cameraZ * 1.5;
+                controls.update();
+            }, undefined, (error) => {
+                console.error(`Error loading model ${projectId}:`, error);
+                const loadingMessage = container.parentElement.querySelector('.blender-loading');
+                if (loadingMessage) loadingMessage.textContent = 'Error loading model';
+            });
+
+            // Animation loop
+            function animate() {
+                requestAnimationFrame(animate);
+                
+                if (rotateModel && model) {
+                    model.rotation.y += 0.005;
+                }
+                
+                controls.update();
+                renderer.render(scene, camera);
+            }
+            animate();
+
+            // Gestion du redimensionnement
+            function onWindowResize() {
+                camera.aspect = container.clientWidth / container.clientHeight;
+                camera.updateProjectionMatrix();
+                renderer.setSize(container.clientWidth, container.clientHeight);
+            }
+            window.addEventListener('resize', onWindowResize);
+
+            // Stocker les références
+            blenderViewers[projectId] = {
+                scene,
+                camera,
+                renderer,
+                controls,
+                model,
+                rotateModel,
+                wireframeMode,
+                lightsEnabled,
+                mainLight,
+                ambientLight
+            };
+
+            // Configurer les contrôles
+            setupBlenderViewerControls(projectId);
+        }
+
+        // Configurer les contrôles du viewer Blender
+        function setupBlenderViewerControls(projectId) {
+            const viewer = blenderViewers[projectId];
+            if (!viewer) return;
+
+            // Réinitialiser la vue
+            document.getElementById(`blender-reset-view-${projectId}`)?.addEventListener('click', () => {
+                viewer.controls.reset();
+            });
+
+            // Rotation automatique
+            document.getElementById(`blender-toggle-rotation-${projectId}`)?.addEventListener('click', function() {
+                viewer.rotateModel = !viewer.rotateModel;
+                this.innerHTML = viewer.rotateModel ? 
+                    '<i class="fas fa-pause"></i> Pause Rotation' : 
+                    '<i class="fas fa-play"></i> Rotation';
+            });
+
+            // Mode fil de fer
+            document.getElementById(`blender-wireframe-toggle-${projectId}`)?.addEventListener('click', function() {
+                viewer.wireframeMode = !viewer.wireframeMode;
+                if (viewer.model) {
+                    viewer.model.traverse((child) => {
+                        if (child.isMesh) {
+                            child.material.wireframe = viewer.wireframeMode;
+                        }
+                    });
+                }
+                this.innerHTML = viewer.wireframeMode ? 
+                    '<i class="fas fa-square"></i> Solid Mode' : 
+                    '<i class="fas fa-border-style"></i> Wireframe Mode';
+            });
+
+            // Contrôle des lumières
+            document.getElementById(`blender-toggle-lights-${projectId}`)?.addEventListener('click', function() {
+                viewer.lightsEnabled = !viewer.lightsEnabled;
+                const intensity = viewer.lightsEnabled ? 0.8 : 0.1;
+                if (viewer.mainLight) viewer.mainLight.intensity = intensity;
+                if (viewer.ambientLight) viewer.ambientLight.intensity = viewer.lightsEnabled ? 0.5 : 0.1;
+                
+                this.innerHTML = viewer.lightsEnabled ? 
+                    '<i class="fas fa-lightbulb"></i> Turn Off' : 
+                    '<i class="far fa-lightbulb"></i> Turn On';
+            });
+        }
+
+        // Ouverture des modals Blender
+        document.querySelectorAll('.blender-btn').forEach(button => {
+            button.addEventListener('click', (e) => {
+                e.preventDefault();
+                const projectId = button.getAttribute('data-project');
+                const modal = document.getElementById(`blender-modal-${projectId}`);
+                modal.style.display = 'block';
+                
+                // Initialiser le viewer quand le modal s'ouvre
+                setTimeout(() => {
+                    if (!blenderViewers[projectId]) {
+                        initializeBlenderViewer(projectId, projectConfigs[projectId]);
+                    }
+                }, 100);
+            });
+        });
+
+        // Fermeture des modals Blender
+        document.querySelectorAll('.blender-close-modal').forEach(button => {
+            button.addEventListener('click', () => {
+                document.querySelectorAll('.blender-modal').forEach(modal => {
+                    modal.style.display = 'none';
+                });
+            });
+        });
+
+        // Fermer en cliquant à l'extérieur
+        window.addEventListener('click', (e) => {
+            if (e.target.classList.contains('blender-modal')) {
+                e.target.style.display = 'none';
             }
         });
     </script>
