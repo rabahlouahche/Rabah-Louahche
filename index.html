@@ -9,7 +9,6 @@
     <script src="https://cdn.jsdelivr.net/npm/three@0.132.2/examples/js/loaders/GLTFLoader.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/three@0.132.2/examples/js/controls/OrbitControls.js"></script>
     <style>
-        /* Vos styles existants restent ici */
         * {
             margin: 0;
             padding: 0;
@@ -18,12 +17,14 @@
         }
 
         :root {
-            --primary: #3498db;
-            --secondary: #2c3e50;
-            --accent: #e74c3c;
-            --light: #ecf0f1;
-            --dark: #2c3e50;
-            --shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            --primary: #ff7e5f;
+            --secondary: #ffb347;
+            --dark: #1a1a2e;
+            --darker: #16213e;
+            --light: #e6e6e6;
+            --card-bg: rgba(255, 255, 255, 0.1);
+            --shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+            --shadow-hover: 0 15px 30px rgba(0, 0, 0, 0.3);
         }
 
         html {
@@ -31,14 +32,16 @@
         }
 
         body {
-            background-color: #f9f9f9;
-            color: #333;
+            background: linear-gradient(135deg, var(--dark) 0%, var(--darker) 100%);
+            color: var(--light);
             line-height: 1.6;
+            min-height: 100vh;
         }
 
         /* Header & Navigation */
         header {
-            background-color: var(--secondary);
+            background: var(--card-bg);
+            backdrop-filter: blur(10px);
             color: white;
             padding: 1rem 0;
             position: fixed;
@@ -46,6 +49,7 @@
             top: 0;
             z-index: 1000;
             box-shadow: var(--shadow);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
         }
 
         nav {
@@ -81,11 +85,14 @@
             color: white;
             text-decoration: none;
             font-weight: 500;
-            transition: color 0.3s;
+            transition: all 0.3s ease;
+            padding: 0.5rem 1rem;
+            border-radius: 5px;
         }
 
         .nav-links a:hover {
             color: var(--primary);
+            background: rgba(255, 255, 255, 0.1);
         }
 
         .menu-toggle {
@@ -97,7 +104,7 @@
         /* Hero Section */
         .hero {
             height: 100vh;
-            background: linear-gradient(rgba(44, 62, 80, 0.8), rgba(44, 62, 80, 0.9)), url('https://images.unsplash.com/photo-1517077304055-6e89abbf09b0?ixlib=rb-4.0.3&auto=format&fit=crop&w=1350&q=80');
+            background: linear-gradient(rgba(26, 26, 46, 0.9), rgba(22, 33, 62, 0.95)), url('https://images.unsplash.com/photo-1517077304055-6e89abbf09b0?ixlib=rb-4.0.3&auto=format&fit=crop&w=1350&q=80');
             background-size: cover;
             background-position: center;
             display: flex;
@@ -111,33 +118,39 @@
         .hero-content h1 {
             font-size: 3.5rem;
             margin-bottom: 1rem;
+            background: linear-gradient(45deg, var(--primary), var(--secondary));
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            text-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
         }
 
         .hero-content p {
             font-size: 1.5rem;
             margin-bottom: 2rem;
+            color: var(--light);
         }
 
         .btn {
             display: inline-block;
-            background-color: var(--primary);
+            background: linear-gradient(45deg, var(--primary), var(--secondary));
             color: white;
             padding: 0.8rem 2rem;
             border-radius: 50px;
             text-decoration: none;
             font-weight: 600;
-            transition: all 0.3s;
+            transition: all 0.3s ease;
             border: none;
             cursor: pointer;
+            box-shadow: 0 5px 15px rgba(255, 126, 95, 0.4);
         }
 
         .btn:hover {
-            background-color: #2980b9;
             transform: translateY(-3px);
-            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+            box-shadow: 0 8px 20px rgba(255, 126, 95, 0.6);
         }
 
-        /* About Section */
+        /* Sections */
         .section {
             padding: 5rem 2rem;
             max-width: 1200px;
@@ -147,10 +160,14 @@
         .section-title {
             text-align: center;
             margin-bottom: 3rem;
-            color: var(--secondary);
             font-size: 2.5rem;
+            background: linear-gradient(45deg, var(--primary), var(--secondary));
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
         }
 
+        /* About Section */
         .about-content {
             display: flex;
             align-items: center;
@@ -162,20 +179,22 @@
         }
 
         .about-text h3 {
-            color: var(--secondary);
+            color: var(--primary);
             margin-bottom: 1rem;
             font-size: 1.8rem;
         }
 
         .about-text p {
             margin-bottom: 1.5rem;
+            color: var(--light);
         }
 
         .about-image {
             flex: 1;
-            border-radius: 10px;
+            border-radius: 15px;
             overflow: hidden;
             box-shadow: var(--shadow);
+            border: 1px solid rgba(255, 255, 255, 0.1);
         }
 
         .about-image img {
@@ -192,15 +211,19 @@
         }
 
         .skill-card {
-            background-color: white;
-            border-radius: 10px;
+            background: var(--card-bg);
+            backdrop-filter: blur(10px);
+            border-radius: 15px;
             padding: 2rem;
             box-shadow: var(--shadow);
-            transition: transform 0.3s;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            text-align: center;
         }
 
         .skill-card:hover {
             transform: translateY(-10px);
+            box-shadow: var(--shadow-hover);
         }
 
         .skill-card i {
@@ -211,20 +234,29 @@
 
         .skill-card h3 {
             margin-bottom: 1rem;
-            color: var(--secondary);
+            color: var(--primary);
+        }
+
+        .skill-card p {
+            color: var(--light);
         }
 
         /* 3D Showcase Section */
         .showcase {
-            background-color: var(--secondary);
+            background: linear-gradient(135deg, var(--dark) 0%, var(--darker) 100%);
             color: white;
             padding: 5rem 2rem;
+            text-align: center;
         }
 
         .showcase-title {
             text-align: center;
             margin-bottom: 3rem;
             font-size: 2.5rem;
+            background: linear-gradient(45deg, var(--primary), var(--secondary));
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
         }
 
         .showcase-container {
@@ -249,7 +281,7 @@
             position: absolute;
             width: 200px;
             height: 200px;
-            background: rgba(255, 255, 255, 0.1);
+            background: var(--card-bg);
             border: 2px solid rgba(255, 255, 255, 0.2);
             display: flex;
             flex-direction: column;
@@ -257,7 +289,7 @@
             justify-content: center;
             text-align: center;
             padding: 1rem;
-            border-radius: 10px;
+            border-radius: 15px;
             backdrop-filter: blur(5px);
         }
 
@@ -265,6 +297,10 @@
             font-size: 3rem;
             margin-bottom: 1rem;
             color: var(--primary);
+        }
+
+        .cube-face h3 {
+            color: var(--light);
         }
 
         .front { transform: translateZ(100px); }
@@ -282,6 +318,7 @@
         .showcase-controls {
             text-align: center;
             margin-top: 2rem;
+            color: var(--light);
         }
 
         /* Projects Section */
@@ -292,15 +329,18 @@
         }
 
         .project-card {
-            background-color: white;
-            border-radius: 10px;
+            background: var(--card-bg);
+            backdrop-filter: blur(10px);
+            border-radius: 15px;
             overflow: hidden;
             box-shadow: var(--shadow);
-            transition: transform 0.3s;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            border: 1px solid rgba(255, 255, 255, 0.1);
         }
 
         .project-card:hover {
             transform: translateY(-10px);
+            box-shadow: var(--shadow-hover);
         }
 
         .project-image {
@@ -312,7 +352,7 @@
             width: 100%;
             height: 100%;
             object-fit: cover;
-            transition: transform 0.5s;
+            transition: transform 0.5s ease;
         }
 
         .project-card:hover .project-image img {
@@ -325,47 +365,158 @@
 
         .project-info h3 {
             margin-bottom: 0.5rem;
-            color: var(--secondary);
+            color: var(--primary);
         }
 
-        /* 3D Projects Section */
-        .projects-3d {
-            background-color: var(--light);
+        .project-info p {
+            color: var(--light);
+            margin-bottom: 1rem;
+        }
+
+        /* Blender 3D Section */
+        .blender-section {
+            background: linear-gradient(135deg, var(--dark) 0%, var(--darker) 100%);
+            color: white;
             padding: 5rem 2rem;
         }
 
-        .projects-3d-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
-            gap: 2rem;
+        .blender-container {
+            max-width: 1200px;
+            margin: 0 auto;
         }
 
-        .project-3d-card {
-            background-color: white;
-            border-radius: 10px;
+        .blender-intro {
+            text-align: center;
+            max-width: 800px;
+            margin: 0 auto 3rem;
+            font-size: 1.1rem;
+            line-height: 1.7;
+            color: var(--light);
+        }
+
+        .blender-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+            gap: 30px;
+            margin: 2rem 0;
+        }
+
+        .blender-card {
+            background: var(--card-bg);
+            backdrop-filter: blur(10px);
+            border-radius: 15px;
             overflow: hidden;
             box-shadow: var(--shadow);
-            transition: transform 0.3s;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            border: 1px solid rgba(255, 255, 255, 0.1);
         }
 
-        .project-3d-card:hover {
+        .blender-card:hover {
             transform: translateY(-10px);
+            box-shadow: var(--shadow-hover);
         }
 
-        .model-container {
-            height: 300px;
+        .blender-preview {
+            width: 100%;
+            height: 220px;
+            background-color: #1a1a1a;
             position: relative;
-            background-color: #f5f5f5;
+            overflow: hidden;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .blender-preview canvas {
+            width: 100%;
+            height: 100%;
+        }
+
+        .blender-info {
+            padding: 20px;
+        }
+
+        .blender-title {
+            font-size: 1.5rem;
+            margin-bottom: 10px;
+            color: var(--primary);
+        }
+
+        .blender-description {
+            color: var(--light);
+            line-height: 1.6;
+            margin-bottom: 20px;
+            height: 80px;
             overflow: hidden;
         }
 
-        .model-container canvas {
-            width: 100%;
-            height: 100%;
-            display: block;
+        .blender-meta {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 15px;
+            font-size: 0.9rem;
+            color: rgba(255, 255, 255, 0.7);
         }
 
-        .model-loading {
+        .blender-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+            margin-bottom: 20px;
+        }
+
+        .blender-tag {
+            background: rgba(255, 255, 255, 0.15);
+            padding: 5px 10px;
+            border-radius: 20px;
+            font-size: 0.8rem;
+        }
+
+        .blender-actions {
+            display: flex;
+            justify-content: space-between;
+            gap: 10px;
+        }
+
+        .blender-btn {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            padding: 10px 20px;
+            border-radius: 8px;
+            text-decoration: none;
+            font-weight: bold;
+            transition: all 0.3s ease;
+            flex: 1;
+            border: none;
+            cursor: pointer;
+            font-size: 0.9rem;
+        }
+
+        .btn-download {
+            background: linear-gradient(45deg, var(--primary), var(--secondary));
+            color: white;
+        }
+
+        .btn-open {
+            background: rgba(255, 255, 255, 0.15);
+            color: var(--light);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+
+        .blender-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+        }
+
+        .btn-download:hover {
+            background: linear-gradient(45deg, #ff6b4a, #ffa533);
+        }
+
+        .btn-open:hover {
+            background: rgba(255, 255, 255, 0.25);
+        }
+
+        .blender-loading {
             position: absolute;
             top: 0;
             left: 0;
@@ -374,26 +525,143 @@
             display: flex;
             justify-content: center;
             align-items: center;
-            background-color: rgba(255, 255, 255, 0.8);
+            background-color: rgba(0, 0, 0, 0.7);
+            color: white;
             z-index: 10;
         }
 
-        .model-loading p {
-            font-weight: 600;
-            color: var(--secondary);
+        /* Modal Blender */
+        .blender-modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.9);
+            z-index: 2000;
+            overflow-y: auto;
+            padding: 1rem 0;
         }
 
-        .project-3d-info {
+        .blender-modal-content {
+            background: var(--darker);
+            width: 95%;
+            max-width: 1200px;
+            margin: 0 auto;
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: var(--shadow-hover);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .blender-modal-header {
             padding: 1.5rem;
+            background: var(--dark);
+            color: white;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
         }
 
-        .project-3d-info h3 {
-            margin-bottom: 0.5rem;
-            color: var(--secondary);
+        .blender-close-modal {
+            background: none;
+            border: none;
+            color: white;
+            font-size: 1.5rem;
+            cursor: pointer;
+            transition: color 0.3s ease;
         }
 
-        .project-3d-info p {
+        .blender-close-modal:hover {
+            color: var(--primary);
+        }
+
+        .blender-modal-body {
+            padding: 2rem;
+            display: flex;
+            flex-direction: column;
+            gap: 2rem;
+        }
+
+        .blender-viewer-container {
+            width: 100%;
+            height: 500px;
+            background-color: #1a1a1a;
+            border-radius: 8px;
+            overflow: hidden;
+            position: relative;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .blender-viewer-container canvas {
+            width: 100%;
+            height: 100%;
+        }
+
+        .blender-controls {
+            display: flex;
+            gap: 10px;
+            justify-content: center;
+            flex-wrap: wrap;
+            margin-top: 10px;
+        }
+
+        .blender-control-btn {
+            background: var(--card-bg);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            padding: 8px 15px;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-weight: 600;
+            display: flex;
+            align-items: center;
+            gap: 5px;
+            color: var(--light);
+        }
+
+        .blender-control-btn:hover {
+            background: var(--primary);
+            color: white;
+        }
+
+        .blender-report-section {
+            margin-bottom: 2rem;
+        }
+
+        .blender-report-section h3 {
+            color: var(--primary);
             margin-bottom: 1rem;
+            padding-bottom: 0.5rem;
+            border-bottom: 2px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .blender-report-section p {
+            margin-bottom: 1rem;
+            color: var(--light);
+        }
+
+        .blender-tech-list {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+            gap: 10px;
+            margin-top: 1rem;
+        }
+
+        .blender-tech-item {
+            background: var(--card-bg);
+            padding: 10px;
+            border-radius: 5px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            color: var(--light);
+        }
+
+        .blender-tech-item i {
+            color: var(--primary);
         }
 
         /* Contact Section */
@@ -406,14 +674,17 @@
             flex: 1;
         }
 
-        .contact-form {
-            flex: 1;
+        .contact-info h3 {
+            color: var(--primary);
+            margin-bottom: 1.5rem;
+            font-size: 1.8rem;
         }
 
         .contact-item {
             display: flex;
             align-items: center;
             margin-bottom: 1.5rem;
+            color: var(--light);
         }
 
         .contact-item i {
@@ -421,6 +692,10 @@
             color: var(--primary);
             margin-right: 1rem;
             width: 30px;
+        }
+
+        .contact-form {
+            flex: 1;
         }
 
         .form-group {
@@ -431,15 +706,26 @@
             display: block;
             margin-bottom: 0.5rem;
             font-weight: 500;
+            color: var(--light);
         }
 
         .form-group input,
         .form-group textarea {
             width: 100%;
             padding: 0.8rem;
-            border: 1px solid #ddd;
+            background: var(--card-bg);
+            border: 1px solid rgba(255, 255, 255, 0.1);
             border-radius: 5px;
             font-size: 1rem;
+            color: var(--light);
+            transition: all 0.3s ease;
+        }
+
+        .form-group input:focus,
+        .form-group textarea:focus {
+            outline: none;
+            border-color: var(--primary);
+            box-shadow: 0 0 0 2px rgba(255, 126, 95, 0.2);
         }
 
         .form-group textarea {
@@ -449,10 +735,11 @@
 
         /* Footer */
         footer {
-            background-color: var(--secondary);
+            background: var(--dark);
             color: white;
             text-align: center;
             padding: 2rem;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
         }
 
         .social-links {
@@ -468,15 +755,177 @@
             width: 40px;
             height: 40px;
             border-radius: 50%;
-            background-color: rgba(255, 255, 255, 0.1);
+            background-color: var(--card-bg);
             color: white;
             margin: 0 0.5rem;
-            transition: all 0.3s;
+            transition: all 0.3s ease;
+            border: 1px solid rgba(255, 255, 255, 0.1);
         }
 
         .social-links a:hover {
-            background-color: var(--primary);
+            background: linear-gradient(45deg, var(--primary), var(--secondary));
             transform: translateY(-3px);
+        }
+
+        /* Project Review Styles */
+        .project-review {
+            margin-top: 2rem;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            padding-top: 2rem;
+        }
+
+        .review-section {
+            margin-bottom: 2rem;
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 10px;
+            padding: 1.5rem;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .review-section h3 {
+            color: var(--primary);
+            margin-bottom: 1rem;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-size: 1.3rem;
+        }
+
+        .review-section h3 i {
+            font-size: 1.2rem;
+        }
+
+        .tech-specs {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 15px;
+            margin-top: 1rem;
+        }
+
+        .spec-item {
+            background: rgba(255, 255, 255, 0.1);
+            padding: 15px;
+            border-radius: 8px;
+            border-left: 4px solid var(--primary);
+        }
+
+        .spec-label {
+            font-weight: bold;
+            color: var(--primary);
+            font-size: 0.9rem;
+            margin-bottom: 5px;
+        }
+
+        .spec-value {
+            color: var(--light);
+            font-size: 1rem;
+        }
+
+        .process-steps {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+            margin-top: 1rem;
+        }
+
+        .process-step {
+            display: flex;
+            gap: 15px;
+            align-items: flex-start;
+            padding: 15px;
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 8px;
+            border-left: 4px solid var(--secondary);
+        }
+
+        .step-number {
+            background: var(--secondary);
+            color: white;
+            width: 30px;
+            height: 30px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            flex-shrink: 0;
+        }
+
+        .step-content h4 {
+            color: var(--light);
+            margin-bottom: 5px;
+        }
+
+        .step-content p {
+            color: rgba(255, 255, 255, 0.8);
+            font-size: 0.9rem;
+            line-height: 1.5;
+        }
+
+        .challenge-item {
+            background: rgba(255, 255, 255, 0.05);
+            padding: 15px;
+            border-radius: 8px;
+            margin-bottom: 15px;
+            border-left: 4px solid #ff6b6b;
+        }
+
+        .challenge-item.solution {
+            border-left-color: #51cf66;
+            margin-top: -10px;
+        }
+
+        .challenge-header {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin-bottom: 10px;
+        }
+
+        .challenge-header i.fa-exclamation-triangle {
+            color: #ff6b6b;
+        }
+
+        .challenge-header i.fa-check-circle {
+            color: #51cf66;
+        }
+
+        .tech-stack {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+            gap: 15px;
+            margin-top: 1rem;
+        }
+
+        .tech-item {
+            background: rgba(255, 255, 255, 0.1);
+            padding: 15px;
+            border-radius: 8px;
+            text-align: center;
+            transition: transform 0.3s ease;
+        }
+
+        .tech-item:hover {
+            transform: translateY(-5px);
+            background: rgba(255, 255, 255, 0.15);
+        }
+
+        .tech-icon {
+            font-size: 2rem;
+            color: var(--primary);
+            margin-bottom: 10px;
+        }
+
+        .tech-name {
+            color: var(--light);
+            font-weight: bold;
+            font-size: 0.9rem;
+        }
+
+        .tech-version {
+            color: rgba(255, 255, 255, 0.7);
+            font-size: 0.8rem;
+            margin-top: 5px;
         }
 
         /* Responsive Design */
@@ -488,8 +937,9 @@
                 top: 100%;
                 left: 0;
                 width: 100%;
-                background-color: var(--secondary);
+                background: var(--dark);
                 padding: 1rem 0;
+                border-top: 1px solid rgba(255, 255, 255, 0.1);
             }
 
             .nav-links.active {
@@ -520,249 +970,44 @@
             .contact-container {
                 flex-direction: column;
             }
-        }
 
-        /* NOUVEAUX STYLES POUR LA SECTION BLENDER 3D */
-        .blender-section {
-            background: linear-gradient(135deg, #1a2a3a, #2c3e50);
-            color: white;
-            padding: 5rem 2rem;
-        }
+            .blender-grid {
+                grid-template-columns: 1fr;
+                padding: 10px;
+            }
+            
+            .blender-actions {
+                flex-direction: column;
+                gap: 10px;
+            }
+            
+            .blender-btn {
+                margin: 0;
+            }
 
-        .blender-container {
-            max-width: 1200px;
-            margin: 0 auto;
-        }
+            .skills-container {
+                grid-template-columns: 1fr;
+            }
 
-        .blender-intro {
-            text-align: center;
-            max-width: 800px;
-            margin: 0 auto 3rem;
-            font-size: 1.1rem;
-            line-height: 1.7;
-        }
-
-        .blender-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
-            gap: 2rem;
-            margin: 2rem 0;
-        }
-
-        .blender-card {
-            background: rgba(255, 255, 255, 0.1);
-            border-radius: 10px;
-            overflow: hidden;
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
-            transition: transform 0.3s ease, box-shadow 0.3s ease;
-            backdrop-filter: blur(10px);
-        }
-
-        .blender-card:hover {
-            transform: translateY(-10px);
-            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.3);
-        }
-
-        .blender-preview {
-            height: 200px;
-            width: 100%;
-            background-color: #1a1a1a;
-            position: relative;
-            overflow: hidden;
-        }
-
-        .blender-preview canvas {
-            width: 100%;
-            height: 100%;
-        }
-
-        .blender-info {
-            padding: 1.5rem;
-        }
-
-        .blender-title {
-            font-size: 1.3rem;
-            margin-bottom: 0.5rem;
-            color: white;
-        }
-
-        .blender-description {
-            color: rgba(255, 255, 255, 0.8);
-            margin-bottom: 1rem;
-            font-size: 0.95rem;
-        }
-
-        .blender-meta {
-            display: flex;
-            justify-content: space-between;
-            font-size: 0.85rem;
-            color: rgba(255, 255, 255, 0.7);
-            margin-bottom: 1rem;
-        }
-
-        .blender-tags {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 5px;
-            margin-bottom: 1rem;
-        }
-
-        .blender-tag {
-            background: rgba(52, 152, 219, 0.3);
-            padding: 3px 8px;
-            border-radius: 3px;
-            font-size: 0.75rem;
-        }
-
-        .blender-btn {
-            display: inline-block;
-            background: var(--primary);
-            color: white;
-            padding: 8px 15px;
-            border-radius: 5px;
-            text-decoration: none;
-            font-weight: 600;
-            transition: background 0.3s ease;
-            cursor: pointer;
-            border: none;
-            width: 100%;
-            text-align: center;
-        }
-
-        .blender-btn:hover {
-            background: #2980b9;
-        }
-
-        .blender-modal {
-            display: none;
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: rgba(0, 0, 0, 0.9);
-            z-index: 2000;
-            overflow-y: auto;
-            padding: 1rem 0;
-        }
-
-        .blender-modal-content {
-            background: white;
-            width: 95%;
-            max-width: 1200px;
-            margin: 0 auto;
-            border-radius: 10px;
-            overflow: hidden;
-            box-shadow: 0 5px 30px rgba(0, 0, 0, 0.3);
-        }
-
-        .blender-modal-header {
-            padding: 1.5rem;
-            background: var(--secondary);
-            color: white;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
-
-        .blender-close-modal {
-            background: none;
-            border: none;
-            color: white;
-            font-size: 1.5rem;
-            cursor: pointer;
-        }
-
-        .blender-modal-body {
-            padding: 2rem;
-            display: flex;
-            flex-direction: column;
-            gap: 2rem;
-        }
-
-        .blender-viewer-container {
-            width: 100%;
-            height: 500px;
-            background-color: #1a1a1a;
-            border-radius: 8px;
-            overflow: hidden;
-            position: relative;
-        }
-
-        .blender-viewer-container canvas {
-            width: 100%;
-            height: 100%;
-        }
-
-        .blender-controls {
-            display: flex;
-            gap: 10px;
-            justify-content: center;
-            flex-wrap: wrap;
-            margin-top: 10px;
-        }
-
-        .blender-control-btn {
-            background: var(--light);
-            border: none;
-            padding: 8px 15px;
-            border-radius: 5px;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            font-weight: 600;
-            display: flex;
-            align-items: center;
-            gap: 5px;
-        }
-
-        .blender-control-btn:hover {
-            background: var(--primary);
-            color: white;
-        }
-
-        .blender-loading {
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-            color: white;
-            font-size: 1.2rem;
-            text-align: center;
-        }
-
-        .blender-report-section {
-            margin-bottom: 2rem;
-        }
-
-        .blender-report-section h3 {
-            color: var(--secondary);
-            margin-bottom: 1rem;
-            padding-bottom: 0.5rem;
-            border-bottom: 2px solid var(--light);
-        }
-
-        .blender-report-section p {
-            margin-bottom: 1rem;
-        }
-
-        .blender-tech-list {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
-            gap: 10px;
-            margin-top: 1rem;
-        }
-
-        .blender-tech-item {
-            background: var(--light);
-            padding: 10px;
-            border-radius: 5px;
-            display: flex;
-            align-items: center;
-            gap: 10px;
-        }
-
-        .blender-tech-item i {
-            color: var(--primary);
+            .projects-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .tech-specs {
+                grid-template-columns: 1fr;
+            }
+            
+            .tech-stack {
+                grid-template-columns: repeat(2, 1fr);
+            }
+            
+            .process-step {
+                flex-direction: column;
+            }
+            
+            .review-section {
+                padding: 1rem;
+            }
         }
     </style>
 </head>
@@ -777,7 +1022,7 @@
                 <li><a href="#skills">Skills</a></li>
                 <li><a href="#showcase">3D Showcase</a></li>
                 <li><a href="#projects">Projects</a></li>
-                <li><a href="#blender">Blender 3D</a></li>
+                <li><a href="#blender">Blender Portfolio</a></li>
                 <li><a href="#contact">Contact</a></li>
             </ul>
             <div class="menu-toggle">
@@ -789,7 +1034,7 @@
     <!-- Hero Section -->
     <section class="hero" id="home">
         <div class="hero-content">
-            <h1>Hi, I'm <span style="color: var(--primary)">Rabah Louahche</span></h1>
+            <h1>I'm <span>Rabah Louahche</span></h1>
             <p>Master 2 Student in Data & Web Engineering at Ferhat Abbas University</p>
             <a href="#about" class="btn">Discover More</a>
         </div>
@@ -806,9 +1051,45 @@
                 <p>My goal is to leverage my technical expertise to solve real-world problems and contribute to innovative projects that push the boundaries of what's possible in data science and web technologies.</p>
                 <a href="#contact" class="btn" style="margin-top: 1.5rem;">Get In Touch</a>
             </div>
-            <div class="about-image">
-                <img src="img/p1.jpg" alt="Rabah Louahche">
-            </div>
+           <div class="about-image" id="organicFrame">
+    <img src="img/p1.jpg" alt="Rabah Louahche">
+</div>
+
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    const frame = document.getElementById('organicFrame');
+    
+    // Générer une forme en vague douce
+    function generateSoftWaveShape() {
+        const points = [];
+        const numPoints = 10;
+        
+        for (let i = 0; i < numPoints; i++) {
+            const angle = (i / numPoints) * Math.PI * 2;
+            // Créer des ondulations douces
+            const baseRadius = 45;
+            const wave = Math.sin(angle * 2) * 5; // Onde régulière
+            const radius = baseRadius + wave;
+            
+            const x = 50 + Math.cos(angle) * radius;
+            const y = 50 + Math.sin(angle) * radius;
+            points.push(`${x}% ${y}%`);
+        }
+        
+        return `polygon(${points.join(', ')})`;
+    }
+    
+    const organicShape = generateSoftWaveShape();
+    
+    frame.style.clipPath = organicShape;
+    frame.style.WebkitClipPath = organicShape;
+    frame.style.border = '8px solid #7f8c8d';
+    frame.style.padding = '10px';
+    frame.style.display = 'inline-block';
+    frame.style.background = 'white';
+    frame.style.borderRadius = '20px';
+});
+</script>
         </div>
     </section>
 
@@ -922,137 +1203,179 @@
         </div>
     </section>
 
-    <!-- NOUVELLE SECTION BLENDER 3D -->
+    <!-- Blender 3D Section -->
     <section class="blender-section" id="blender">
         <div class="blender-container">
-            <h2 class="section-title" style="color: white;">Blender 3D Portfolio</h2>
+            <h2 class="section-title">Blender 3D Portfolio</h2>
             <div class="blender-intro">
                 <p>Welcome to my 3D modeling portfolio. Each project includes an interactive 3D model and a detailed report on the creation process. Explore my work in 3D modeling, texturing, and rendering using Blender.</p>
             </div>
 
             <div class="blender-grid">
-                <!-- Projet 1 - Vaisseau Spatial -->
+                <!-- Project 1 - Table and Chairs -->
                 <div class="blender-card">
-                  <div class="blender-preview" id="blender-preview-1">
-                    <div class="blender-loading">Loading 3D Model...</div>
-                </div>
-                <div class="blender-info">
-                    <h3 class="blender-title">Table moderne avec chaises</h3>
-                    <p class="blender-description">Un ensemble de salle à manger élégant comprenant une table contemporaine et six chaises design, modélisé avec des matériaux réalistes et un éclairage naturel.</p>
-                    <div class="blender-meta">
-                        <span><i class="far fa-calendar"></i> Octobre 2025</span>
-                        <span><i class="far fa-clock"></i> 3 heures</span>
+                    <div class="blender-preview" id="blender-preview-1">
+                        <div class="blender-loading">Loading 3D Model...</div>
                     </div>
-                    <div class="blender-tags">
-                        <span class="blender-tag">Architecture</span>
-                        <span class="blender-tag">Design d'intérieur</span>
-                        <span class="blender-tag">Modélisation</span>
-                        <span class="blender-tag">Mobilier</span>
+                    <div class="blender-info">
+                        <h3 class="blender-title">Modern Table with Chairs</h3>
+                        <p class="blender-description">An elegant dining set with contemporary design, realistic materials and natural lighting.</p>
+                        <div class="blender-meta">
+                            <span><i class="far fa-calendar"></i> October 2025</span>
+                            <span><i class="far fa-clock"></i> 3 hours</span>
+                        </div>
+                        <div class="blender-tags">
+                            <span class="blender-tag">Architecture</span>
+                            <span class="blender-tag">Interior</span>
+                            <span class="blender-tag">Furniture</span>
+                        </div>
+                        <div class="blender-actions">
+                            <button class="blender-btn btn-download" data-project="tablechaise" data-type="blend">
+                                <i class="fas fa-download"></i> Download .blend
+                            </button>
+                            <button class="blender-btn btn-view" data-project="tablechaise" data-type="view">
+                                <i class="fas fa-eye"></i> View 3D
+                            </button>
+                        </div>
                     </div>
-                    <button class="blender-btn" data-project="1">Voir le projet</button>
-                </div>
-                
-
-                <!-- Projet 2 - Casque -->
-                <div class="blender-preview" id="blender-preview-1">
-                    <div class="blender-loading">Loading 3D Model...</div>
-                </div>
-                <div class="blender-info">
-                    <h3 class="blender-title">Arme Sci-Fi Animée</h3>
-                    <p class="blender-description">Un pistolet énergétique futuriste avec un système d'animation complet incluant le rechargement, la visée et les effets de tir. Modélisé avec rigging avancé et textures PBR.</p>
-                    <div class="blender-meta">
-                        <span><i class="far fa-calendar"></i> Novembre 2025</span>
-                        <span><i class="far fa-clock"></i> 6 heures</span>
-                    </div>
-                    <div class="blender-tags">
-                        <span class="blender-tag">Weapon</span>
-                        <span class="blender-tag">Animation</span>
-                        <span class="blender-tag">Rigging</span>
-                        <span class="blender-tag">Sci-Fi</span>
-                        <span class="blender-tag">Game Asset</span>
-                    </div>
-                    <button class="blender-btn" data-project="1">View Project</button>
                 </div>
 
-                <!-- Projet 3 - Lanterne -->
-                <div class="blender-preview" id="blender-preview-1">
-                    <div class="blender-loading">Loading 3D Model...</div>
+                <!-- Project 2 - Sci-Fi Weapon -->
+                <div class="blender-card">
+                    <div class="blender-preview" id="blender-preview-2">
+                        <div class="blender-loading">Loading 3D Model...</div>
+                    </div>
+                    <div class="blender-info">
+                        <h3 class="blender-title">Sci-Fi Weapon</h3>
+                        <p class="blender-description">Futuristic energy weapon with detailed modeling, PBR textures and animation rig.</p>
+                        <div class="blender-meta">
+                            <span><i class="far fa-calendar"></i> November 2025</span>
+                            <span><i class="far fa-clock"></i> 6 hours</span>
+                        </div>
+                        <div class="blender-tags">
+                            <span class="blender-tag">Weapon</span>
+                            <span class="blender-tag">Sci-Fi</span>
+                            <span class="blender-tag">Game Asset</span>
+                        </div>
+                        <div class="blender-actions">
+                            <button class="blender-btn btn-download" data-project="Airgun Haenel Model 3" data-type="blend">
+                                <i class="fas fa-download"></i> Download .blend
+                            </button>
+                            <button class="blender-btn btn-view" data-project="Airgun Haenel Model 3" data-type="view">
+                                <i class="fas fa-eye"></i> View 3D
+                            </button>
+                        </div>
+                    </div>
                 </div>
-                <div class="blender-info">
-                    <h3 class="blender-title">Parapluie Élégant</h3>
-                    <p class="blender-description">Un parapluie moderne avec mécanisme d'ouverture/fermeture animé, texture de tissu réaliste et structure métallique détaillée. Parfait pour les scènes extérieures.</p>
-                    <div class="blender-meta">
-                        <span><i class="far fa-calendar"></i> Novembre 2024</span>
-                        <span><i class="far fa-clock"></i> 4 heures</span>
+
+                <!-- Project 3 - Rain Scene -->
+                <div class="blender-card">
+                    <div class="blender-preview" id="blender-preview-3">
+                        <div class="blender-loading">Loading 3D Model...</div>
                     </div>
-                    <div class="blender-tags">
-                        <span class="blender-tag">Accessoire</span>
-                        <span class="blender-tag">Animation</span>
-                        <span class="blender-tag">Texturing</span>
-                        <span class="blender-tag">Props</span>
-                        <span class="blender-tag">Realistic</span>
+                    <div class="blender-info">
+                        <h3 class="blender-title">Rain Scene with Sound</h3>
+                        <p class="blender-description">Atmospheric scene with rain particles, sound effects and dynamic lighting.</p>
+                        <div class="blender-meta">
+                            <span><i class="far fa-calendar"></i> December 2025</span>
+                            <span><i class="far fa-clock"></i> 8 hours</span>
+                        </div>
+                        <div class="blender-tags">
+                            <span class="blender-tag">Environment</span>
+                            <span class="blender-tag">Particles</span>
+                            <span class="blender-tag">Animation</span>
+                        </div>
+                        <div class="blender-actions">
+                            <button class="blender-btn btn-download" data-project="RainWithSaound" data-type="blend">
+                                <i class="fas fa-download"></i> Download .blend
+                            </button>
+                            <button class="blender-btn btn-view" data-project="RainWithSaound" data-type="view">
+                                <i class="fas fa-eye"></i> View 3D
+                            </button>
+                        </div>
                     </div>
-                    <button class="blender-btn" data-project="1">View Project</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Modal for 3D Viewer -->
+        <div class="blender-modal" id="blender-modal">
+            <div class="blender-modal-content">
+                <div class="blender-modal-header">
+                    <h2 id="modal-title">3D Model Viewer</h2>
+                    <button class="blender-close-modal">&times;</button>
+                </div>
+                <div class="blender-modal-body">
+                    <div class="blender-viewer-container">
+                        <div id="blender-viewer"></div>
+                        <div class="blender-loading">Loading 3D Model...</div>
+                    </div>
+                    <div class="blender-controls">
+                        <button class="blender-control-btn" id="blender-reset-view">
+                            <i class="fas fa-sync-alt"></i> Reset View
+                        </button>
+                        <button class="blender-control-btn" id="blender-toggle-rotation">
+                            <i class="fas fa-pause"></i> Pause Rotation
+                        </button>
+                        <button class="blender-control-btn" id="blender-wireframe-toggle">
+                            <i class="fas fa-border-style"></i> Wireframe Mode
+                        </button>
+                    </div>
+                    
+                    <!-- Project Review Sections -->
+                    <div class="project-review">
+                        <!-- Project Overview -->
+                        <div class="review-section">
+                            <h3><i class="fas fa-info-circle"></i> Project Overview</h3>
+                            <div id="project-overview">
+                                <!-- Content will be dynamically inserted -->
+                            </div>
+                        </div>
+
+                        <!-- Technical Details -->
+                        <div class="review-section">
+                            <h3><i class="fas fa-cogs"></i> Technical Details</h3>
+                            <div class="tech-specs" id="tech-specs">
+                                <!-- Content will be dynamically inserted -->
+                            </div>
+                        </div>
+
+                        <!-- Creation Process -->
+                        <div class="review-section">
+                            <h3><i class="fas fa-road"></i> Creation Process</h3>
+                            <div id="creation-process">
+                                <!-- Content will be dynamically inserted -->
+                            </div>
+                        </div>
+
+                        <!-- Challenges & Solutions -->
+                        <div class="review-section">
+                            <h3><i class="fas fa-lightbulb"></i> Challenges & Solutions</h3>
+                            <div id="challenges-solutions">
+                                <!-- Content will be dynamically inserted -->
+                            </div>
+                        </div>
+
+                        <!-- Tools & Technologies -->
+                        <div class="review-section">
+                            <h3><i class="fas fa-tools"></i> Tools & Technologies</h3>
+                            <div class="tech-stack" id="tech-stack">
+                                <!-- Content will be dynamically inserted -->
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="download-info">
+                        <p><strong>Want to edit this model?</strong></p>
+                        <p>Download the .blend file to open in Blender and modify the project.</p>
+                        <button class="blender-btn btn-download" id="modal-download-btn" style="margin-top: 10px;">
+                            <i class="fas fa-download"></i> Download .blend File
+                        </button>
+                    </div>
                 </div>
             </div>
         </div>
     </section>
-
-    <!-- Modals pour les projets Blender -->
-    <div class="blender-modal" id="blender-modal-1">
-        <div class="blender-modal-content">
-            <div class="blender-modal-header">
-                <h2>Spaceship</h2>
-                <button class="blender-close-modal">&times;</button>
-            </div>
-            <div class="blender-modal-body">
-                <div class="blender-viewer-container">
-                    <div id="blender-viewer-1"></div>
-                    <div class="blender-loading">Loading 3D Model...</div>
-                </div>
-                <div class="blender-controls">
-                    <button class="blender-control-btn" id="blender-reset-view-1">
-                        <i class="fas fa-sync-alt"></i> Reset View
-                    </button>
-                    <button class="blender-control-btn" id="blender-toggle-rotation-1">
-                        <i class="fas fa-pause"></i> Pause Rotation
-                    </button>
-                    <button class="blender-control-btn" id="blender-wireframe-toggle-1">
-                        <i class="fas fa-border-style"></i> Wireframe Mode
-                    </button>
-                    <button class="blender-control-btn" id="blender-toggle-lights-1">
-                        <i class="fas fa-lightbulb"></i> Lights
-                    </button>
-                </div>
-                
-                <div class="blender-report-section">
-                    <h3>Project Overview</h3>
-                    <p>This project involved creating a detailed spaceship with realistic sci-fi design. The goal was to master hard surface modeling and PBR texturing techniques.</p>
-                </div>
-                
-                <div class="blender-report-section">
-                    <h3>Process & Techniques</h3>
-                    <p>The spaceship was created using several advanced techniques:</p>
-                    <ul>
-                        <li>Polygonal modeling with subdivision surface</li>
-                        <li>UV unwrapping for precise texturing</li>
-                        <li>PBR textures (Albedo, Normal, Roughness, Metalness)</li>
-                        <li>HDRI lighting for realistic rendering</li>
-                    </ul>
-                </div>
-                
-                <div class="blender-report-section">
-                    <h3>Technologies Used</h3>
-                    <div class="blender-tech-list">
-                        <div class="blender-tech-item"><i class="fab fa-blender"></i> Blender 3.4</div>
-                        <div class="blender-tech-item"><i class="fas fa-cube"></i> Modeling</div>
-                        <div class="blender-tech-item"><i class="fas fa-paint-brush"></i> Texture Painting</div>
-                        <div class="blender-tech-item"><i class="fas fa-sun"></i> Cycles Render</div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
 
     <!-- Contact Section -->
     <section class="section" id="contact">
@@ -1127,116 +1450,307 @@
     </footer>
 
     <script>
-        // =============================================
-        // CONFIGURATION - MODIFIEZ ICI POUR VOS MODÈLES
-        // =============================================
-
-        // Modèles d'exemple (URLs en ligne)
-        const blenderModels = {
-            1: {
-                glbPath: 'modles/TableChaisse',
-                scale: 2,
-                position: { x: 0, y: 0, z: 0 },
-                title: "Spaceship",
-                description: "A detailed spaceship with PBR textures"
+        // Project Reviews Data
+        const projectReviews = {
+            "tablechaise": {
+                overview: {
+                    description: "A modern dining set featuring a minimalist table and ergonomic chairs, designed for contemporary living spaces. The project focuses on clean lines, realistic materials, and optimal lighting to create a photorealistic render.",
+                    goal: "Create a visually appealing dining set that demonstrates proficiency in architectural visualization and material creation.",
+                    inspiration: "Scandinavian furniture design and modern interior trends"
+                },
+                technical: {
+                    polygons: "45,000",
+                    textures: "PBR Materials (Albedo, Normal, Roughness, Metalness)",
+                    lighting: "HDRI + Area Lights",
+                    renderEngine: "Cycles",
+                    fileSize: "8.7 MB",
+                    renderTime: "45 minutes"
+                },
+                process: [
+                    {
+                        step: "1",
+                        title: "Reference Collection",
+                        description: "Gathered inspiration from modern furniture catalogs and architectural magazines to establish design direction."
+                    },
+                    {
+                        step: "2",
+                        title: "Blocking & Proportions",
+                        description: "Created basic shapes to establish proper scale and proportions between table and chairs."
+                    },
+                    {
+                        step: "3",
+                        title: "Detailed Modeling",
+                        description: "Added edge loops, bevels, and fine details to achieve realistic furniture geometry."
+                    },
+                    {
+                        step: "4",
+                        title: "UV Unwrapping",
+                        description: "Carefully unwrapped UVs to ensure optimal texture mapping and minimal distortion."
+                    },
+                    {
+                        step: "5",
+                        title: "Material Creation",
+                        description: "Developed PBR materials for wood, metal, and fabric using Blender's shader editor."
+                    },
+                    {
+                        step: "6",
+                        title: "Lighting & Rendering",
+                        description: "Set up HDRI lighting with additional area lights to create natural-looking illumination."
+                    }
+                ],
+                challenges: [
+                    {
+                        challenge: "Achieving realistic wood grain direction across complex curved surfaces",
+                        solution: "Used texture painting with stencils and careful UV alignment to maintain consistent wood grain flow"
+                    },
+                    {
+                        challenge: "Creating comfortable chair ergonomics while maintaining aesthetic appeal",
+                        solution: "Referenced human ergonomics data and iterated through multiple design variations"
+                    },
+                    {
+                        challenge: "Optimizing render times while maintaining high-quality materials",
+                        solution: "Implemented efficient light paths and used denoising for cleaner renders with fewer samples"
+                    }
+                ],
+                tools: [
+                    { name: "Blender", version: "3.4", icon: "fab fa-blender" },
+                    { name: "Substance Painter", version: "2023", icon: "fas fa-paint-brush" },
+                    { name: "Cycles Render", version: "3.4", icon: "fas fa-sun" },
+                    { name: "UV Packmaster", version: "2.8", icon: "fas fa-expand-arrows-alt" }
+                ]
             },
-            2: {
-                glbPath: 'modles/AirgunHaenelModel3.glb',
-                scale: 2,
-                position: { x: 0, y: 0, z: 0 },
-                title: "Detailed Helmet", 
-                description: "Helmet with realistic textures and PBR materials"
+            "Airgun Haenel Model 3": {
+                overview: {
+                    description: "A futuristic energy weapon with intricate mechanical details, animated components, and realistic PBR materials. Designed as a game-ready asset with optimized topology.",
+                    goal: "Create a visually striking sci-fi weapon that demonstrates hard-surface modeling and animation skills.",
+                    inspiration: "Cyberpunk aesthetics and modern military firearm design"
+                },
+                technical: {
+                    polygons: "28,500",
+                    textures: "4K PBR Texture Set",
+                    rigging: "Bone-based Animation Rig",
+                    animations: "Reload, Aim, Fire Sequence",
+                    fileSize: "15.2 MB",
+                    gameReady: "Yes - LODs included"
+                },
+                process: [
+                    {
+                        step: "1",
+                        title: "Concept Development",
+                        description: "Sketched multiple weapon concepts focusing on unique silhouette and functional elements."
+                    },
+                    {
+                        step: "2",
+                        title: "Hard Surface Modeling",
+                        description: "Used subdivision modeling techniques to create clean, mechanical-looking surfaces."
+                    },
+                    {
+                        step: "3",
+                        title: "Boolean Operations",
+                        description: "Implemented complex cutouts and details using boolean operations with proper cleanup."
+                    },
+                    {
+                        step: "4",
+                        title: "Rigging & Weight Painting",
+                        description: "Created bone hierarchy for animated components and painted vertex weights."
+                    },
+                    {
+                        step: "5",
+                        title: "Animation Setup",
+                        description: "Developed keyframe animations for reloading, aiming, and firing sequences."
+                    },
+                    {
+                        step: "6",
+                        title: "Texture Baking",
+                        description: "Baked normal maps and ambient occlusion for optimal real-time performance."
+                    }
+                ],
+                challenges: [
+                    {
+                        challenge: "Managing complex boolean operations without creating ngons or artifacts",
+                        solution: "Used weighted normals and careful edge flow to maintain clean topology after boolean operations"
+                    },
+                    {
+                        challenge: "Creating believable energy effects and glow materials",
+                        solution: "Combined emission shaders with volumetric effects and post-processing for realistic energy visuals"
+                    },
+                    {
+                        challenge: "Optimizing topology for game engines while maintaining detail",
+                        solution: "Used normal mapping for surface details and maintained clean edge loops for deformation"
+                    }
+                ],
+                tools: [
+                    { name: "Blender", version: "3.5", icon: "fab fa-blender" },
+                    { name: "Substance Painter", version: "2023", icon: "fas fa-paint-brush" },
+                    { name: "Rigify", version: "3.5", icon: "fas fa-bone" },
+                    { name: "Eevee", version: "3.5", icon: "fas fa-bolt" }
+                ]
             },
-            3: {
-                glbPath: 'models/RainWithSaound.glb',
-                scale: 3,
-                position: { x: 0, y: 0, z: 0 },
-                title: "Game Style Lantern",
-                description: "Low-poly game asset with stylized textures"
+            "RainWithSaound": {
+                overview: {
+                    description: "An atmospheric environment scene featuring realistic rain particles, dynamic lighting, and integrated sound design. Creates an immersive rainy urban setting.",
+                    goal: "Demonstrate proficiency in particle systems, environmental lighting, and multi-sensory scene creation.",
+                    inspiration: "Film noir aesthetics and rainy night cityscapes"
+                },
+                technical: {
+                    particles: "50,000 Rain Particles",
+                    simulation: "Fluid Dynamics for Puddles",
+                    lighting: "Dynamic Volumetric Lighting",
+                    sound: "Spatial Audio Integration",
+                    fileSize: "22.8 MB",
+                    renderTime: "2 hours 15 minutes"
+                },
+                process: [
+                    {
+                        step: "1",
+                        title: "Environment Setup",
+                        description: "Created basic city block geometry and established camera angles for cinematic composition."
+                    },
+                    {
+                        step: "2",
+                        title: "Particle System Development",
+                        description: "Built complex particle systems for rain, splashes, and mist effects."
+                    },
+                    {
+                        step: "3",
+                        title: "Material Creation",
+                        description: "Developed wet surface shaders with dynamic puddles and reflections."
+                    },
+                    {
+                        step: "4",
+                        title: "Lighting Design",
+                        description: "Implemented volumetric lighting to create god rays through rain and atmospheric haze."
+                    },
+                    {
+                        step: "5",
+                        title: "Sound Integration",
+                        description: "Synchronized rain sounds with visual elements for immersive experience."
+                    },
+                    {
+                        step: "6",
+                        title: "Post-Processing",
+                        description: "Added color grading, depth of field, and motion blur for cinematic quality."
+                    }
+                ],
+                challenges: [
+                    {
+                        challenge: "Creating realistic rain particle behavior and interactions",
+                        solution: "Used force fields and collision objects to simulate wind effects and surface impacts"
+                    },
+                    {
+                        challenge: "Managing render times with complex particle systems and volumetrics",
+                        solution: "Implemented optimized light paths and used instancing for particle rendering"
+                    },
+                    {
+                        challenge: "Synchronizing audio with visual elements seamlessly",
+                        solution: "Used Blender's video sequence editor with frame-accurate audio synchronization"
+                    }
+                ],
+                tools: [
+                    { name: "Blender", version: "3.6", icon: "fab fa-blender" },
+                    { name: "Cycles", version: "3.6", icon: "fas fa-sun" },
+                    { name: "MantaFlow", version: "3.6", icon: "fas fa-water" },
+                    { name: "Audacity", version: "3.2", icon: "fas fa-volume-up" }
+                ]
             }
         };
 
-        // =============================================
-        // VOS MODÈLES - REMPLACEZ PAR VOS FICHIERS GLB
-        // =============================================
-        /*
-        const myBlenderModels = {
-            // Exemple avec vos fichiers locaux :
-            1: {
-                glbPath: 'models/mon_vaisseau.glb',
-                scale: 1.0,
-                position: { x: 0, y: 0, z: 0 },
-                title: "My Spaceship",
-                description: "Description of my project"
-            },
-            2: {
-                glbPath: 'models/mon_casque.glb', 
+        // Configuration for Blender projects
+        const blenderProjects = {
+            "tablechaise": {
+                key: "tablechaise",
+                glbPath: "mes_project_blender/tablechaise.glb",
+                blendPath: "mes_project_blender/TableChaise.blend",
+                title: "Modern Table with Chairs",
                 scale: 1.5,
-                position: { x: 0, y: -0.5, z: 0 },
-                title: "My Helmet",
-                description: "Other description"
+                position: { x: 0, y: -0.5, z: 0 }
+            },
+            "Airgun Haenel Model 3": {
+                key: "Airgun Haenel Model 3",
+                glbPath: "mes_project_blender/Airgun Haenel Model 3.glb",
+                blendPath: "mes_project_blender/Airgun Haenel Model 3.blend", 
+                title: "Sci-Fi Weapon",
+                scale: 0.8,
+                position: { x: 0, y: 0, z: 0 }
+            },
+            "RainWithSaound": {
+                key: "RainWithSaound",
+                glbPath: "mes_project_blender/RainWithSaound.glb",
+                blendPath: "mes_project_blender/RainWithSaound.blend",
+                title: "Rain Scene with Sound",
+                scale: 1.2,
+                position: { x: 0, y: 0, z: 0 }
             }
         };
-        */
 
-        // Utiliser mes modèles s'ils existent, sinon les exemples
-        const projectConfigs = Object.keys(blenderModels).length > 0 ? blenderModels : blenderModels;
+        // Global variables
+        let currentViewer = null;
+        let currentProject = null;
 
-        // Variables globales pour les viewers Blender
-        const blenderViewers = {};
-
-        // Mobile menu toggle
-        document.querySelector('.menu-toggle').addEventListener('click', function() {
-            document.querySelector('.nav-links').classList.toggle('active');
-        });
-
-        // Close mobile menu when clicking on a link
-        document.querySelectorAll('.nav-links a').forEach(link => {
-            link.addEventListener('click', () => {
-                document.querySelector('.nav-links').classList.remove('active');
-            });
-        });
-
-        // Smooth scrolling for anchor links
-        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-            anchor.addEventListener('click', function(e) {
-                e.preventDefault();
-                
-                const targetId = this.getAttribute('href');
-                if(targetId === '#') return;
-                
-                const targetElement = document.querySelector(targetId);
-                if(targetElement) {
-                    window.scrollTo({
-                        top: targetElement.offsetTop - 80,
-                        behavior: 'smooth'
-                    });
-                }
-            });
-        });
-
-        // Form submission
-        document.getElementById('contactForm').addEventListener('submit', function(e) {
-            e.preventDefault();
-            alert('Thank you for your message! I will get back to you soon.');
-            this.reset();
-        });
-
-        // Initialiser les previews des cartes Blender
+        // Initialize when page loads
         document.addEventListener('DOMContentLoaded', function() {
             initializeBlenderPreviews();
+            setupEventListeners();
+            setupMobileMenu();
+            setupSmoothScrolling();
+            setupContactForm();
         });
 
-        // Initialiser les previews miniatures Blender
-        function initializeBlenderPreviews() {
-            Object.keys(projectConfigs).forEach(projectId => {
-                createBlenderPreview(projectId, projectConfigs[projectId]);
+        // Mobile menu functionality
+        function setupMobileMenu() {
+            document.querySelector('.menu-toggle').addEventListener('click', function() {
+                document.querySelector('.nav-links').classList.toggle('active');
+            });
+
+            // Close mobile menu when clicking on a link
+            document.querySelectorAll('.nav-links a').forEach(link => {
+                link.addEventListener('click', () => {
+                    document.querySelector('.nav-links').classList.remove('active');
+                });
             });
         }
 
-        // Créer une preview miniature Blender
-        function createBlenderPreview(projectId, config) {
-            const container = document.getElementById(`blender-preview-${projectId}`);
+        // Smooth scrolling
+        function setupSmoothScrolling() {
+            document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+                anchor.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    
+                    const targetId = this.getAttribute('href');
+                    if(targetId === '#') return;
+                    
+                    const targetElement = document.querySelector(targetId);
+                    if(targetElement) {
+                        window.scrollTo({
+                            top: targetElement.offsetTop - 80,
+                            behavior: 'smooth'
+                        });
+                    }
+                });
+            });
+        }
+
+        // Contact form
+        function setupContactForm() {
+            document.getElementById('contactForm').addEventListener('submit', function(e) {
+                e.preventDefault();
+                alert('Thank you for your message! I will get back to you soon.');
+                this.reset();
+            });
+        }
+
+        // Create preview thumbnails for each project
+        function initializeBlenderPreviews() {
+            Object.keys(blenderProjects).forEach((projectKey, index) => {
+                const projectId = index + 1;
+                const project = blenderProjects[projectKey];
+                createBlenderPreview(projectId, project);
+            });
+        }
+
+        // Create a 3D preview thumbnail
+        function createBlenderPreview(previewId, project) {
+            const container = document.getElementById(`blender-preview-${previewId}`);
             if (!container) return;
 
             const width = container.clientWidth;
@@ -1255,11 +1769,11 @@
             renderer.setSize(width, height);
             renderer.setClearColor(0x000000, 0);
             
-            // Vider le conteneur et ajouter le renderer
+            // Clear container and add renderer
             container.innerHTML = '';
             container.appendChild(renderer.domElement);
 
-            // Lumière
+            // Lighting
             const ambientLight = new THREE.AmbientLight(0xffffff, 0.6);
             scene.add(ambientLight);
             
@@ -1267,33 +1781,37 @@
             directionalLight.position.set(5, 10, 7);
             scene.add(directionalLight);
 
-            // Charger le modèle GLB
+            // Load GLB model
             const loader = new THREE.GLTFLoader();
-            loader.load(config.glbPath, (gltf) => {
+            loader.load(project.glbPath, (gltf) => {
                 const model = gltf.scene;
-                model.scale.set(config.scale * 0.3, config.scale * 0.3, config.scale * 0.3);
-                model.position.set(config.position.x, config.position.y, config.position.z);
+                model.scale.set(project.scale * 0.3, project.scale * 0.3, project.scale * 0.3);
+                model.position.set(project.position.x, project.position.y, project.position.z);
                 scene.add(model);
 
-                // Animation de la preview
+                // Animation for preview
                 function animate() {
                     requestAnimationFrame(animate);
                     model.rotation.y += 0.01;
                     renderer.render(scene, camera);
                 }
                 animate();
+                
+                // Hide loading message
+                const loadingMessage = container.querySelector('.blender-loading');
+                if (loadingMessage) loadingMessage.style.display = 'none';
             }, undefined, (error) => {
-                console.error(`Error loading preview ${projectId}:`, error);
-                container.innerHTML = '<div class="blender-loading">Loading Error</div>';
+                console.error(`Error loading preview ${previewId}:`, error);
+                container.innerHTML = '<div class="blender-loading">Preview Error</div>';
             });
         }
 
-        // Initialiser un viewer Blender complet
-        function initializeBlenderViewer(projectId, config) {
-            const container = document.getElementById(`blender-viewer-${projectId}`);
+        // Initialize full 3D viewer in modal
+        function initializeBlenderViewer(project) {
+            const container = document.getElementById('blender-viewer');
             if (!container) return;
 
-            // Nettoyer le conteneur
+            // Clear container
             container.innerHTML = '';
 
             // Scene
@@ -1316,11 +1834,10 @@
             controls.enableDamping = true;
             controls.dampingFactor = 0.05;
 
-            // Lumière ambiante
+            // Lighting
             const ambientLight = new THREE.AmbientLight(0xffffff, 0.5);
             scene.add(ambientLight);
 
-            // Lumière directionnelle principale
             const mainLight = new THREE.DirectionalLight(0xffffff, 0.8);
             mainLight.position.set(10, 10, 5);
             mainLight.castShadow = true;
@@ -1328,21 +1845,19 @@
 
             let model = null;
             let rotateModel = true;
-            let wireframeMode = false;
-            let lightsEnabled = true;
 
-            // Charger le modèle GLB
+            // Load GLB model
             const loader = new THREE.GLTFLoader();
-            loader.load(config.glbPath, (gltf) => {
-                // Cacher le message de chargement
+            loader.load(project.glbPath, (gltf) => {
+                // Hide loading message
                 const loadingMessage = container.parentElement.querySelector('.blender-loading');
                 if (loadingMessage) loadingMessage.style.display = 'none';
 
                 model = gltf.scene;
-                model.scale.set(config.scale, config.scale, config.scale);
-                model.position.set(config.position.x, config.position.y, config.position.z);
+                model.scale.set(project.scale, project.scale, project.scale);
+                model.position.set(project.position.x, project.position.y, project.position.z);
                 
-                // Activer les ombres pour tous les meshes
+                // Enable shadows
                 model.traverse((child) => {
                     if (child.isMesh) {
                         child.castShadow = true;
@@ -1352,7 +1867,7 @@
                 
                 scene.add(model);
 
-                // Ajuster la caméra pour cadrer le modèle
+                // Adjust camera to fit model
                 const box = new THREE.Box3().setFromObject(model);
                 const center = box.getCenter(new THREE.Vector3());
                 const size = box.getSize(new THREE.Vector3());
@@ -1363,9 +1878,9 @@
                 camera.position.z = cameraZ * 1.5;
                 controls.update();
             }, undefined, (error) => {
-                console.error(`Error loading model ${projectId}:`, error);
+                console.error(`Error loading model:`, error);
                 const loadingMessage = container.parentElement.querySelector('.blender-loading');
-                if (loadingMessage) loadingMessage.textContent = 'Error loading model';
+                if (loadingMessage) loadingMessage.textContent = 'Error loading 3D model';
             });
 
             // Animation loop
@@ -1381,7 +1896,7 @@
             }
             animate();
 
-            // Gestion du redimensionnement
+            // Handle window resize
             function onWindowResize() {
                 camera.aspect = container.clientWidth / container.clientHeight;
                 camera.updateProjectionMatrix();
@@ -1389,102 +1904,219 @@
             }
             window.addEventListener('resize', onWindowResize);
 
-            // Stocker les références
-            blenderViewers[projectId] = {
+            // Store viewer reference
+            currentViewer = {
                 scene,
                 camera,
                 renderer,
                 controls,
                 model,
-                rotateModel,
-                wireframeMode,
-                lightsEnabled,
-                mainLight,
-                ambientLight
+                rotateModel
             };
 
-            // Configurer les contrôles
-            setupBlenderViewerControls(projectId);
+            // Setup viewer controls
+            setupViewerControls();
         }
 
-        // Configurer les contrôles du viewer Blender
-        function setupBlenderViewerControls(projectId) {
-            const viewer = blenderViewers[projectId];
+        // Setup viewer control buttons
+        function setupViewerControls() {
+            const viewer = currentViewer;
             if (!viewer) return;
 
-            // Réinitialiser la vue
-            document.getElementById(`blender-reset-view-${projectId}`)?.addEventListener('click', () => {
+            // Reset view
+            document.getElementById('blender-reset-view')?.addEventListener('click', () => {
                 viewer.controls.reset();
             });
 
-            // Rotation automatique
-            document.getElementById(`blender-toggle-rotation-${projectId}`)?.addEventListener('click', function() {
+            // Toggle rotation
+            document.getElementById('blender-toggle-rotation')?.addEventListener('click', function() {
                 viewer.rotateModel = !viewer.rotateModel;
                 this.innerHTML = viewer.rotateModel ? 
                     '<i class="fas fa-pause"></i> Pause Rotation' : 
-                    '<i class="fas fa-play"></i> Rotation';
+                    '<i class="fas fa-play"></i> Resume Rotation';
             });
 
-            // Mode fil de fer
-            document.getElementById(`blender-wireframe-toggle-${projectId}`)?.addEventListener('click', function() {
-                viewer.wireframeMode = !viewer.wireframeMode;
+            // Toggle wireframe
+            document.getElementById('blender-wireframe-toggle')?.addEventListener('click', function() {
                 if (viewer.model) {
                     viewer.model.traverse((child) => {
                         if (child.isMesh) {
-                            child.material.wireframe = viewer.wireframeMode;
+                            child.material.wireframe = !child.material.wireframe;
                         }
                     });
                 }
-                this.innerHTML = viewer.wireframeMode ? 
+                this.innerHTML = viewer.model?.material?.wireframe ? 
                     '<i class="fas fa-square"></i> Solid Mode' : 
                     '<i class="fas fa-border-style"></i> Wireframe Mode';
             });
+        }
 
-            // Contrôle des lumières
-            document.getElementById(`blender-toggle-lights-${projectId}`)?.addEventListener('click', function() {
-                viewer.lightsEnabled = !viewer.lightsEnabled;
-                const intensity = viewer.lightsEnabled ? 0.8 : 0.1;
-                if (viewer.mainLight) viewer.mainLight.intensity = intensity;
-                if (viewer.ambientLight) viewer.ambientLight.intensity = viewer.lightsEnabled ? 0.5 : 0.1;
-                
-                this.innerHTML = viewer.lightsEnabled ? 
-                    '<i class="fas fa-lightbulb"></i> Turn Off' : 
-                    '<i class="far fa-lightbulb"></i> Turn On';
+        // Setup event listeners for buttons
+        function setupEventListeners() {
+            // Download buttons
+            document.querySelectorAll('.btn-download').forEach(button => {
+                button.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    const projectKey = this.getAttribute('data-project');
+                    const project = blenderProjects[projectKey];
+                    
+                    if (project) {
+                        // Create temporary link for download
+                        const link = document.createElement('a');
+                        link.href = project.blendPath;
+                        link.download = projectKey + '.blend';
+                        document.body.appendChild(link);
+                        link.click();
+                        document.body.removeChild(link);
+                        
+                        // Optional: Track download
+                        console.log(`Downloaded: ${projectKey}.blend`);
+                    }
+                });
+            });
+
+            // View buttons
+            document.querySelectorAll('.btn-view').forEach(button => {
+                button.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    const projectKey = this.getAttribute('data-project');
+                    const project = blenderProjects[projectKey];
+                    
+                    if (project) {
+                        currentProject = project;
+                        openModelViewer(project);
+                    }
+                });
+            });
+
+            // Modal close button
+            document.querySelector('.blender-close-modal').addEventListener('click', () => {
+                closeModelViewer();
+            });
+
+            // Modal download button
+            document.getElementById('modal-download-btn').addEventListener('click', function() {
+                if (currentProject) {
+                    const link = document.createElement('a');
+                    link.href = currentProject.blendPath;
+                    link.download = currentProject.title + '.blend';
+                    document.body.appendChild(link);
+                    link.click();
+                    document.body.removeChild(link);
+                }
+            });
+
+            // Close modal when clicking outside
+            window.addEventListener('click', (e) => {
+                if (e.target.classList.contains('blender-modal')) {
+                    closeModelViewer();
+                }
             });
         }
 
-        // Ouverture des modals Blender
-        document.querySelectorAll('.blender-btn').forEach(button => {
-            button.addEventListener('click', (e) => {
-                e.preventDefault();
-                const projectId = button.getAttribute('data-project');
-                const modal = document.getElementById(`blender-modal-${projectId}`);
-                modal.style.display = 'block';
-                
-                // Initialiser le viewer quand le modal s'ouvre
-                setTimeout(() => {
-                    if (!blenderViewers[projectId]) {
-                        initializeBlenderViewer(projectId, projectConfigs[projectId]);
-                    }
-                }, 100);
-            });
-        });
+        // Function to load project review into modal
+        function loadProjectReview(projectKey) {
+            const review = projectReviews[projectKey];
+            if (!review) return;
 
-        // Fermeture des modals Blender
-        document.querySelectorAll('.blender-close-modal').forEach(button => {
-            button.addEventListener('click', () => {
-                document.querySelectorAll('.blender-modal').forEach(modal => {
-                    modal.style.display = 'none';
-                });
-            });
-        });
+            // Project Overview
+            document.getElementById('project-overview').innerHTML = `
+                <p>${review.overview.description}</p>
+                <div class="spec-item" style="margin-top: 15px;">
+                    <div class="spec-label">PROJECT GOAL</div>
+                    <div class="spec-value">${review.overview.goal}</div>
+                </div>
+                <div class="spec-item">
+                    <div class="spec-label">INSPIRATION</div>
+                    <div class="spec-value">${review.overview.inspiration}</div>
+                </div>
+            `;
 
-        // Fermer en cliquant à l'extérieur
-        window.addEventListener('click', (e) => {
-            if (e.target.classList.contains('blender-modal')) {
-                e.target.style.display = 'none';
+            // Technical Details
+            const techSpecsHTML = Object.entries(review.technical).map(([key, value]) => `
+                <div class="spec-item">
+                    <div class="spec-label">${key.toUpperCase()}</div>
+                    <div class="spec-value">${value}</div>
+                </div>
+            `).join('');
+            document.getElementById('tech-specs').innerHTML = techSpecsHTML;
+
+            // Creation Process
+            const processHTML = review.process.map(step => `
+                <div class="process-step">
+                    <div class="step-number">${step.step}</div>
+                    <div class="step-content">
+                        <h4>${step.title}</h4>
+                        <p>${step.description}</p>
+                    </div>
+                </div>
+            `).join('');
+            document.getElementById('creation-process').innerHTML = `
+                <div class="process-steps">
+                    ${processHTML}
+                </div>
+            `;
+
+            // Challenges & Solutions
+            const challengesHTML = review.challenges.map(item => `
+                <div class="challenge-item">
+                    <div class="challenge-header">
+                        <i class="fas fa-exclamation-triangle"></i>
+                        <strong>Challenge</strong>
+                    </div>
+                    <p>${item.challenge}</p>
+                </div>
+                <div class="challenge-item solution">
+                    <div class="challenge-header">
+                        <i class="fas fa-check-circle"></i>
+                        <strong>Solution</strong>
+                    </div>
+                    <p>${item.solution}</p>
+                </div>
+            `).join('');
+            document.getElementById('challenges-solutions').innerHTML = challengesHTML;
+
+            // Tools & Technologies
+            const toolsHTML = review.tools.map(tool => `
+                <div class="tech-item">
+                    <div class="tech-icon">
+                        <i class="${tool.icon}"></i>
+                    </div>
+                    <div class="tech-name">${tool.name}</div>
+                    <div class="tech-version">v${tool.version}</div>
+                </div>
+            `).join('');
+            document.getElementById('tech-stack').innerHTML = toolsHTML;
+        }
+
+        // Open model viewer modal
+        function openModelViewer(project) {
+            const modal = document.getElementById('blender-modal');
+            const title = document.getElementById('modal-title');
+            
+            title.textContent = project.title;
+            modal.style.display = 'block';
+            
+            // Load project review
+            loadProjectReview(project.key);
+            
+            // Initialize viewer after a short delay to ensure DOM is ready
+            setTimeout(() => {
+                initializeBlenderViewer(project);
+            }, 100);
+        }
+
+        // Close model viewer modal
+        function closeModelViewer() {
+            const modal = document.getElementById('blender-modal');
+            modal.style.display = 'none';
+            
+            // Clean up Three.js resources
+            if (currentViewer) {
+                currentViewer.renderer.dispose();
+                currentViewer = null;
             }
-        });
+        }
     </script>
 </body>
 </html>
